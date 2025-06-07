@@ -1,0 +1,12 @@
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities\bin\Debug\Dominio.Core.Entities.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities\bin\Debug\Dominio.Core.Entities.pdb
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities\obj\Debug\Dominio.Core.Entities.csproj.AssemblyReference.cache
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities\obj\Debug\Dominio.Core.Entities.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities\obj\Debug\Dominio.Core.Entities.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities\obj\Debug\Dominio.Core.Entities.pdb
+C:\Users\SUITE\Downloads\Almacen\Dominio.Core.Entities\bin\Debug\Dominio.Core.Entities.dll
+C:\Users\SUITE\Downloads\Almacen\Dominio.Core.Entities\bin\Debug\Dominio.Core.Entities.pdb
+C:\Users\SUITE\Downloads\Almacen\Dominio.Core.Entities\obj\Debug\Dominio.Core.Entities.csproj.AssemblyReference.cache
+C:\Users\SUITE\Downloads\Almacen\Dominio.Core.Entities\obj\Debug\Dominio.Core.Entities.csproj.CoreCompileInputs.cache
+C:\Users\SUITE\Downloads\Almacen\Dominio.Core.Entities\obj\Debug\Dominio.Core.Entities.dll
+C:\Users\SUITE\Downloads\Almacen\Dominio.Core.Entities\obj\Debug\Dominio.Core.Entities.pdb

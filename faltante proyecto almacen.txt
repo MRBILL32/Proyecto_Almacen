@@ -1,0 +1,13 @@
+faltante proyecto almacen:
+
+-terminar la documentación
+-añadir a la tabla usuario dirección varchar(50) not null
+-crear el esquema schProductos
+-crear la tabla schProductos.productos
+-crear también sus respectivos usp_ y comprobar que funcionen a la perfeccion en sql 
+-terminar el código para los botones de registro en visual studio
+-crear la vista y código de "recordar contraseña" que pedirá que ingrese su correo electrónico personal y después de enviar la alerta al correo dirija a la vista correspondiente
+-crear el código para productos(carrito de compras) y sus vistas
+-hacer que la vista iniciar sesión tenga prioridad sobre todo el código 
+-hacer que unos botones queden desabilitados o eliminados de la vista usuario(2) y solo sean visibles para administrador(1)
+-si queda tiempo extra y no ahí trabajos pendientes personalizar un poco la pagina
