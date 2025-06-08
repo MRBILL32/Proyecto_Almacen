@@ -5,26 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|c:\\users\\administrator\\downloads\\almacen\\almacen\\views\\usuario\\iniciarsesion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|solutionrelative:almacen\\views\\usuario\\iniciarsesion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|c:\\users\\administrator\\downloads\\almacen\\almacen\\views\\usuario\\decidir.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|solutionrelative:almacen\\views\\usuario\\decidir.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B66D20F5-7719-494B-925F-0DDE90788682}|Infraestructura.Data.SqlServer\\Infraestructura.Data.SqlServer.csproj|c:\\users\\administrator\\downloads\\almacen\\infraestructura.data.sqlserver\\usuario_dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B66D20F5-7719-494B-925F-0DDE90788682}|Infraestructura.Data.SqlServer\\Infraestructura.Data.SqlServer.csproj|solutionrelative:infraestructura.data.sqlserver\\usuario_dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|c:\\users\\administrator\\downloads\\almacen\\almacen\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|solutionrelative:almacen\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|c:\\users\\administrator\\downloads\\almacen\\almacen\\views\\usuario\\confirmacion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|solutionrelative:almacen\\views\\usuario\\confirmacion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A966CABC-6295-48A5-B94F-84D61A5BE7DF}|Dominio.Core.MainModule\\Dominio.Core.MainModule.csproj|c:\\users\\administrator\\downloads\\almacen\\dominio.core.mainmodule\\usuariomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A966CABC-6295-48A5-B94F-84D61A5BE7DF}|Dominio.Core.MainModule\\Dominio.Core.MainModule.csproj|solutionrelative:dominio.core.mainmodule\\usuariomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,21 +14,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UsuarioController.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Controllers\\UsuarioController.cs",
-              "RelativeDocumentMoniker": "Almacen\\Controllers\\UsuarioController.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Controllers\\UsuarioController.cs",
-              "RelativeToolTip": "Almacen\\Controllers\\UsuarioController.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAxwIIAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T18:40:35.487Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -57,61 +24,9 @@
               "RelativeDocumentMoniker": "Almacen\\Views\\Usuario\\IniciarSesion.cshtml",
               "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Views\\Usuario\\IniciarSesion.cshtml",
               "RelativeToolTip": "Almacen\\Views\\Usuario\\IniciarSesion.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-06T17:25:18.677Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Decidir.cshtml",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Views\\Usuario\\Decidir.cshtml",
-              "RelativeDocumentMoniker": "Almacen\\Views\\Usuario\\Decidir.cshtml",
-              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Views\\Usuario\\Decidir.cshtml",
-              "RelativeToolTip": "Almacen\\Views\\Usuario\\Decidir.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-06T18:59:24.631Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Usuario_DAL.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\Infraestructura.Data.SqlServer\\Usuario_DAL.cs",
-              "RelativeDocumentMoniker": "Infraestructura.Data.SqlServer\\Usuario_DAL.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\Infraestructura.Data.SqlServer\\Usuario_DAL.cs",
-              "RelativeToolTip": "Infraestructura.Data.SqlServer\\Usuario_DAL.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAD4v5wAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T18:50:05.701Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Confirmacion.cshtml",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Views\\Usuario\\Confirmacion.cshtml",
-              "RelativeDocumentMoniker": "Almacen\\Views\\Usuario\\Confirmacion.cshtml",
-              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Views\\Usuario\\Confirmacion.cshtml",
-              "RelativeToolTip": "Almacen\\Views\\Usuario\\Confirmacion.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-06T19:16:19.095Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UsuarioManager.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\Dominio.Core.MainModule\\UsuarioManager.cs",
-              "RelativeDocumentMoniker": "Dominio.Core.MainModule\\UsuarioManager.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\Dominio.Core.MainModule\\UsuarioManager.cs",
-              "RelativeToolTip": "Dominio.Core.MainModule\\UsuarioManager.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAYwBsAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T18:49:10.119Z",
+              "WhenOpened": "2025-06-08T09:45:28.231Z",
               "EditorCaption": ""
             }
           ]

@@ -61,6 +61,7 @@ namespace Almacen.Controllers
             ViewBag.roles = new SelectList(Roles.Rol(), "idRol", "tipoRol", reg.idRol);
             return View(reg);
         }
+        
         // GET: IniciarSesion
         public ActionResult IniciarSesion()
         {
@@ -68,36 +69,43 @@ namespace Almacen.Controllers
         }
 
         // POST: IniciarSesion
-        [HttpPost]
-        public ActionResult IniciarSesion(IniciarSesion model)
+        [HttpPost] public ActionResult IniciarSesion(IniciarSesion model)
         {
             if (!ModelState.IsValid)
                 return View(model);
 
-            // Aquí no se hashea la contraseña
-            var usuario = Usuarios.IniciarSesion(model.login, model.password);
-
-            if (usuario == null)
+            try
             {
-                ModelState.AddModelError("", "Usuario o contraseña incorrectos.");
-                return View(model);
+                var usuario = Usuarios.IniciarSesion(model.login, model.password);
+
+                if (usuario == null)
+                {
+                    ModelState.AddModelError("", "Usuario o contraseña incorrectos.");
+                    return View(model);
+                }
+
+                // Autenticación correcta: guarda datos en sesión
+                Session["usuario"] = usuario;
+                TempData["Exito"] = "Has iniciado sesión correctamente.";
+                return RedirectToAction("Registrar", "Usuario");
             }
-
-            // Autenticación correcta: guarda datos en sesión
-            Session["usuario"] = usuario;
-
-            // Redirige a la acción Registrar del UsuarioController
-            TempData["Exito"] = "Has iniciado sesión correctamente.";
-            return RedirectToAction("Registrar", "Usuario");
-        }
-
-        public ActionResult EnEspera()
-        {
-            return View();
+            catch (Exception ex)
+            {
+                // Si el mensaje es el de cuenta pendiente, muestra el mensaje especial
+                if (ex.Message.Contains("Estado Pendiente."))
+                {
+                    TempData["MensajePendiente"] = "Su cuenta está pendiente de revisión. Si tarda mucho, comuníquese con soporte.";
+                    return RedirectToAction("EnEspera", "Usuario");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Usuario o contraseña incorrectos.");
+                    return View(model);
+                }
+            }
         }
 
         // Usuario/Decidir
-        [HttpGet]
         public ActionResult Decidir(int idUsuario)
         {
             var usuario = Usuarios.ObtenerPorId(idUsuario);
@@ -107,8 +115,7 @@ namespace Almacen.Controllers
             return View(usuario);
         }
 
-        [HttpPost]
-        public ActionResult Decidir(int IdUsuario, string decision)
+        [HttpPost] public ActionResult Decidir(int IdUsuario, string decision)
         {
             var usuario = Usuarios.ObtenerPorId(IdUsuario); // ← Primero obtén los datos
 
@@ -122,12 +129,87 @@ namespace Almacen.Controllers
             }
             else
             {
-                CorreoHelper.EnviarAviso(usuario.correo, usuario.nombres);
+                CorreoHelper.EnviarRechazo(usuario.correo, usuario.nombres);
                 ViewBag.Mensaje = "El usuario ha sido rechazado.";
                 ViewBag.EsExito = false;
             }
 
             return View("Confirmacion");
         }
+
+        public ActionResult EnEspera()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult RecuperarPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RecuperarPassword(RecuperarPassword model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var usuario = Usuarios.BuscarCorreo(model.Correo);
+
+            TempData["Exito"] = "Si el correo ingresado está registrado, recibirá un mensaje con instrucciones para recuperar su contraseña.";
+
+            if (usuario != null)
+            {
+                try
+                {
+                    string urlRecuperar = Url.Action("ActualizarPassword", "Usuario", new { id = usuario.IdUsuario }, Request.Url.Scheme);
+                    CorreoHelper.EnviarRecuperacion(usuario.correo, urlRecuperar, usuario.nombres);
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Error = "No se pudo enviar el correo: " + ex.Message;
+                    return View(model);
+                }
+            }
+
+            return RedirectToAction("RecuperarPassword", "Usuario");
+        }
+
+
+        // GET: Usuario/ActualizarPassword
+        [HttpGet]
+        public ActionResult ActualizarPassword(int? id)
+        {
+            if (id == null)
+                return RedirectToAction("RecuperarPassword", "Usuario");
+
+            TempData["idUserRecuperar"] = id.Value;
+            return View();
+        }
+
+        // POST: Usuario/ActualizarPassword
+        [HttpPost]
+        public ActionResult ActualizarPassword(string nuevaPassword)
+        {
+            if (TempData["idUserRecuperar"] == null)
+                return RedirectToAction("ActualizarPassword");
+
+            int idUser = (int)TempData["idUserRecuperar"];
+
+            if (string.IsNullOrWhiteSpace(nuevaPassword))
+            {
+                ViewBag.Error = "Debe ingresar una nueva contraseña.";
+                return View();
+            }
+
+            Usuarios.ActualizarPassword(idUser, nuevaPassword);
+
+            TempData["Exito"] = "¡Contraseña actualizada correctamente!";
+            return RedirectToAction("IniciarSesion", "Usuario");
+        }
+
+
+
     }
 }

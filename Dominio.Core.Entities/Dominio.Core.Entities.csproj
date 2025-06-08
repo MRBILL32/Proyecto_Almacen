@@ -44,8 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActualizarPassword.cs" />
     <Compile Include="IniciarSesion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecuperarPassword.cs" />
     <Compile Include="ResultadoRegistro.cs" />
     <Compile Include="tb_Rol.cs" />
     <Compile Include="tb_Usuario.cs" />

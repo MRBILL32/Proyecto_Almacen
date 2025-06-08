@@ -32,5 +32,15 @@ namespace Dominio.Core.MainModule
         {
             usuario.CambiarEstado(idUsuario, nuevoEstado);
         }
+
+        public tb_Usuario BuscarCorreo(string correo)
+        {
+            return usuario.BuscarCorreo(correo);
+        }
+
+        public void ActualizarPassword(int idUser, string nuevaPassword) 
+        {
+            usuario.ActualizarPassword(idUser, nuevaPassword);
+        }
     }
 }

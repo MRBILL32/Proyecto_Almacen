@@ -2,11 +2,21 @@
     ViewBag.Title = "Registro Pendiente";
 }
 
-<h2>Registro Pendiente de Aprobación</h2>
+<body style="background-color: antiquewhite">
 
-<p>
-    Gracias por registrarte. Tu cuenta está pendiente de aprobación por un administrador.
-    Por favor, espera mientras validamos tu solicitud y le hacemos incapie de estar atento a su correo electornico, gracias.
-</p>
-<br />
-@Html.ActionLink("Regresar", "IniciarSesion", "Usuario", null, new { @class = "btn btn-danger" })
+    <h2>Registro Pendiente de Aprobación</h2>
+
+    <p>
+        Gracias por registrarte. Tu cuenta está pendiente de aprobación por un administrador.
+        <br />
+        Por favor, espere mientras validamos su solicitud y le hacemos incapie de estar atento a su correo electornico, gracias.
+        <br />
+        @if (TempData["MensajePendiente"] != null)
+        {
+            <br />
+            <strong>Pdta.: Si ya intentó iniciar sesión y lo redirigió aquí, entonces le recomendamos comunicarse con Soporte para que le solucione el problema.</strong>
+        }
+    </p>
+    <br />
+    @Html.ActionLink("Regresar", "IniciarSesion", "Usuario", null, new { @class = "btn btn-danger" })
+</body>

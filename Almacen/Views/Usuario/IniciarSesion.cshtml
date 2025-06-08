@@ -29,6 +29,10 @@
         @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
     </div>
     <br />
+    <p>
+        <a href="@Url.Action("RecuperarPassword", "Usuario")">¿Has olvidado tu contraseña?</a>
+    </p>
+
     <button type="submit" class="btn btn-success">Iniciar Sesion</button>
     @Html.ActionLink("Crear Cuenta", "Registrar", "Usuario", null, new { @class = "btn btn-warning" })
 }

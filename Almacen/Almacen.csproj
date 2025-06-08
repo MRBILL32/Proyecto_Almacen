@@ -183,6 +183,8 @@
     <Content Include="Views\Usuario\EnEspera.cshtml" />
     <Content Include="Views\Usuario\Decidir.cshtml" />
     <Content Include="Views\Usuario\Confirmacion.cshtml" />
+    <Content Include="Views\Usuario\RecuperarPassword.cshtml" />
+    <Content Include="Views\Usuario\ActualizarPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

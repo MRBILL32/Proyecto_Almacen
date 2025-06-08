@@ -85,15 +85,17 @@ namespace Infraestructura.Data.SqlServer
                         tipoRol = reader["tipoRol"].ToString(),
                         idRol = Convert.ToInt32(reader["idRol"]),
                         login = reader["login"].ToString(),
-                        correo = reader["correo"].ToString()
+                        correo = reader["correo"].ToString(),
+                        estado = reader["estado"].ToString()
                     };
                 }
 
                 reader.Close();
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
                 // no es necesario escribir algo aqui
+                throw new Exception(ex.Message);
 
             }
             finally
@@ -145,25 +147,25 @@ namespace Infraestructura.Data.SqlServer
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
 
-                SqlDataReader reader = cmd.ExecuteReader();
+                SqlDataReader dr = cmd.ExecuteReader();
 
-                if (reader.Read())
+                if (dr.Read())
                 {
                     usuario = new tb_Usuario()
                     {
-                        IdUsuario = Convert.ToInt32(reader["idUser"]),
-                        nombres = reader["nombres"].ToString(),
-                        apellidos = reader["apellidos"].ToString(),
-                        dni = reader["dni"].ToString(),
-                        tipoRol = reader["tipoRol"].ToString(),
-                        idRol = Convert.ToInt32(reader["idRol"]),
-                        login = reader["login"].ToString(),
-                        correo = reader["correo"].ToString(),
-                        estado = reader["estado"].ToString()
+                        IdUsuario = Convert.ToInt32(dr["idUser"]),
+                        nombres = dr["nombres"].ToString(),
+                        apellidos = dr["apellidos"].ToString(),
+                        dni = dr["dni"].ToString(),
+                        tipoRol = dr["tipoRol"].ToString(),
+                        idRol = Convert.ToInt32(dr["idRol"]),
+                        login = dr["login"].ToString(),
+                        correo = dr["correo"].ToString(),
+                        estado = dr["estado"].ToString()
                     };
                 }
 
-                reader.Close();
+                dr.Close();
             }
             catch (SqlException ex)
             {
@@ -176,6 +178,69 @@ namespace Infraestructura.Data.SqlServer
             }
 
             return usuario;
+        }
+
+        public tb_Usuario BuscarCorreo(string correo)
+        {
+            tb_Usuario usuario = null;
+            cnx = cn.Conectar();
+
+            try
+            {
+                cnx.Open();
+                SqlCommand cmd = new SqlCommand("usp_BuscarCorreo", cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@correo", correo);
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.Read())
+                    {
+                        usuario = new tb_Usuario()
+                        {
+                            IdUsuario = Convert.ToInt32(dr["idUser"]),
+                            nombres = dr["nombres"].ToString(),
+                            apellidos = dr["apellidos"].ToString(),
+                            dni = dr["dni"].ToString(),
+                            tipoRol = dr["tipoRol"].ToString(),
+                            idRol = Convert.ToInt32(dr["idRol"]),
+                            login = dr["login"].ToString(),
+                            correo = dr["correo"].ToString(),
+                            estado = dr["estado"].ToString()
+                        };
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Error al obtener usuario por Correo: " + ex.Message);
+            }
+            finally
+            {
+                if (cnx.State == ConnectionState.Open)
+                    cnx.Close();
+            }
+            return usuario;
+        }
+
+        public void ActualizarPassword(int idUser, string nuevaPassword)
+        {
+            cnx = cn.Conectar();
+            try
+            {
+                cnx.Open();
+                SqlCommand cmd = new SqlCommand("usp_ActualizarUser", cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idUser", idUser);
+                cmd.Parameters.AddWithValue("@newLogin", DBNull.Value); // No cambia el login
+                cmd.Parameters.AddWithValue("@newPassword", nuevaPassword);
+                cmd.ExecuteNonQuery();
+            }
+            finally
+            {
+                if (cnx.State == ConnectionState.Open)
+                    cnx.Close();
+            }
         }
 
     }

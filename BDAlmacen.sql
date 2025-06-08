@@ -70,9 +70,6 @@ alter database Almacen add log file
 )
 go
 
-sp_helpdb Almacen
-go
-
 /*====== schemas y filegroups =====*/
 
 create schema schLogin
@@ -143,8 +140,8 @@ BEGIN
 END
 go
 
-exec usp_CrearUser 'Osiander Stivent', 'Carhuas Marallano', '74643027', 1, 'MRBILL32', 'D@k12345', 'stivent456@gmail.com','aprobado'
-exec usp_CrearUser 'Francisca ', 'Perez', '7456871', 2, 'Fran71', '12345', 'franperez@gmail.com','aprobado'
+exec usp_CrearUser 'Osiander Stivent', 'Carhuas Marallano', '74643027', 1, 'MRBILL32', 'D@k12345', 'stivent456@gmail.com','Aprobado'
+exec usp_CrearUser 'Francisca ', 'Perez', '7456871', 2, 'Fran71', '12345', 'franperez@gmail.com','Aprobado'
 go
 
 /*=== Listar Usuarios ===*/
@@ -178,37 +175,40 @@ JOIN schLogin.Rol R ON U.idRol = R.idRol
 WHERE idUser = @idUsuario
 go
 
-exec usp_ObtenerUsuarioPorId 18
+/*=== Buscar por Correo*/
+CREATE OR ALTER PROCEDURE usp_BuscarCorreo
+    @correo VARCHAR(150)
+AS
+   SELECT * FROM schLogin.Usuario WHERE correo = @correo
+
+GO
+
+exec usp_BuscarCorreo 'stivent456@gmail.com'
 go
 
-/*=== Actualizar Usuario o contraseña ===*/
+/*=== Actualizar contraseña ===*/
 create or alter procedure usp_ActualizarUser
-	@idUser int,
-	@oldPassword varchar(30),
-	@newLogin varchar(20) = null,
-	@newPassword varchar(30) = null
+    @idUser int,
+    @newLogin varchar(20) = null,
+    @newPassword varchar(30) = null
 as
 begin
-	-- Verificar credenciales actuales
-	if not exists (
-		select 1 from schLogin.Usuario
-		where idUser = @idUser and password = @oldPassword
-	)
-	begin
-		raiserror('Contraseña actual incorrecta.', 16, 1);
-		return;
-	end
+    -- Verificar que el usuario exista
+    if not exists (
+        select 1 from schLogin.Usuario where idUser = @idUser
+    )
+    begin
+        raiserror('Usuario no encontrado.', 16, 1);
+        return;
+    end
 
-	-- Actualizar solo si se proporciona un nuevo valor
-	update schLogin.Usuario
-	set 
-		login = isnull(@newLogin, login),
-		password = isnull(@newPassword, password)
-	where idUser = @idUser;
+    -- Actualizar solo si se proporciona un nuevo valor
+    update schLogin.Usuario
+    set 
+        login = isnull(@newLogin, login),
+        password = isnull(@newPassword, password)
+    where idUser = @idUser;
 end;
-go
-
-exec usp_ActualizarUser 1, 'D@k12345', 'MRBILL32', 'D@k12345'
 go
 
 /*=== Iniciar Sesion ===*/
@@ -217,6 +217,7 @@ CREATE OR ALTER PROCEDURE usp_InicioSesion
     @password VARCHAR(30) 
 AS
 BEGIN
+    -- Verificar si el usuario existe
     IF NOT EXISTS (
         SELECT 1
         FROM schLogin.Usuario
@@ -227,6 +228,18 @@ BEGIN
         RETURN;
     END
 
+    -- Verificar si el usuario está pendiente
+    IF EXISTS (
+        SELECT 1
+        FROM schLogin.Usuario
+        WHERE login = @login AND password = @password AND estado = 'pendiente'
+    )
+    BEGIN
+        RAISERROR('Estado Pendiente.', 16, 1);
+        RETURN;
+    END
+
+    -- Si pasa las validaciones, devolver los datos
     SELECT 
         U.idUser,
         U.nombres,
@@ -235,13 +248,14 @@ BEGIN
         R.tipoRol,
         U.login,
         U.correo,
-		U.estado
+        U.estado
     FROM schLogin.Usuario U
     INNER JOIN schLogin.Rol R ON U.idRol = R.idRol
     WHERE U.login = @login AND U.password = @password;
 END;
 GO
-EXEC usp_InicioSesion @login='MRBILL32', @password='D@k12345'
+
+EXEC usp_InicioSesion @login='Fran', @password='12345'
 go
 
 /*=== Cambiar Estado ===*/
@@ -262,10 +276,6 @@ BEGIN
         WHERE idUser = @idUsuario;
     END
 END
-go
-
-EXEC usp_CambiarEstado @idUsuario = 18, @nuevoEstado = 'Rechazado'
-exec usp_ListarUser
 go
 
 /*===== Productos =====*/
