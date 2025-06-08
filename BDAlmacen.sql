@@ -179,8 +179,22 @@ go
 CREATE OR ALTER PROCEDURE usp_BuscarCorreo
     @correo VARCHAR(150)
 AS
-   SELECT * FROM schLogin.Usuario WHERE correo = @correo
-
+BEGIN
+    SELECT 
+        U.idUser,
+        U.nombres,
+        U.apellidos,
+        U.dni,
+        U.idRol,
+        R.tipoRol,         -- ← Aquí traes el nombre del rol
+        U.login,
+        U.password,
+        U.correo,
+        U.estado
+    FROM schLogin.Usuario U
+    INNER JOIN schLogin.Rol R ON U.idRol = R.idRol
+    WHERE U.correo = @correo;
+END
 GO
 
 exec usp_BuscarCorreo 'stivent456@gmail.com'
