@@ -1,0 +1,6 @@
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Pedido\bin\Debug\Dominio.Core.Entities.Pedido.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Pedido\bin\Debug\Dominio.Core.Entities.Pedido.pdb
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Pedido\obj\Debug\Dominio.Core.Entities.Pedido.csproj.AssemblyReference.cache
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Pedido\obj\Debug\Dominio.Core.Entities.Pedido.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Pedido\obj\Debug\Dominio.Core.Entities.Pedido.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Pedido\obj\Debug\Dominio.Core.Entities.Pedido.pdb

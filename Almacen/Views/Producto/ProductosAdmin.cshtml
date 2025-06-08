@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Dominio.Core.Entities.Producto.Tb_Producto>
+
+<h2>Vista de Productos para Administrador:</h2>
+<h2>Gestión de Productos</h2>
+<br />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<style>
+    .inactivo-img {
+        filter: grayscale(100%) opacity(0.5);
+    }
+</style>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="@Url.Content(item.ImagenUrl)"
+                     class="card-img-top @(item.Activo ? "" : "inactivo-img")"
+                     alt="Imagen de @item.NomProd"
+                     style="height:180px; object-fit:cover;">
+                <div class="card-body d-flex flex-column">
+                    <h6 class="card-subtitle mb-2 text-muted">ID: @item.IdProd</h6>
+                    <h5 class="card-title">@item.NomProd</h5>
+                    <p class="card-text mb-1"><strong>Marca:</strong> @item.MarcaProd</p>
+                    <p class="card-text mb-1"><strong>Categoría:</strong> @item.NomCate</p>
+                    <p class="card-text mb-1"><strong>Precio:</strong> S/. @item.PrecioUnit.ToString("N2")</p>
+                    <p class="card-text mb-1"><strong>Stock:</strong> @item.Stock</p>
+                    <p class="card-text mb-2"><strong>Activo:</strong> @(item.Activo ? "Sí" : "No")</p>
+                    <div class="mt-auto">
+                        <a href="@Url.Action("Editar", "Producto", new { id = item.IdProd })"
+                           class="btn btn-warning btn-sm mb-1 w-100">
+                            Editar
+                        </a>
+                        <a href="@Url.Action("Eliminar", "Producto", new { id = item.IdProd })"
+                           class="btn btn-danger btn-sm w-100"
+                           onclick="return confirm('¿Seguro que deseas eliminar este producto?');">
+                            Eliminar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@{
+    int numeroPagina = ViewBag.NumeroPagina is int ? (int)ViewBag.NumeroPagina : 1;
+    int totalPaginas = ViewBag.TotalPaginas is int ? (int)ViewBag.TotalPaginas : 1;
+    int paginaAnterior = numeroPagina > 1 ? numeroPagina - 1 : 1;
+    int paginaSiguiente = numeroPagina < totalPaginas ? numeroPagina + 1 : totalPaginas;
+}
+
+@if (totalPaginas > 1)
+{
+    <nav aria-label="Paginación">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(numeroPagina <= 1 ? "disabled" : "")">
+                <a class="page-link" href="@(numeroPagina <= 1 ? "#" : Url.Action("ProductosAdmin", "Producto", new { numeropagina = paginaAnterior }))" tabindex="-1">
+                    &laquo; Anterior
+                </a>
+            </li>
+
+            @for (int i = 1; i <= totalPaginas; i++)
+            {
+                if (i == numeroPagina)
+                {
+                    <li class="page-item active">
+                        <span class="page-link" aria-current="page">@i</span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("ProductosAdmin", "Producto", new { numeropagina = i })">@i</a>
+                    </li>
+                }
+            }
+
+            <li class="page-item @(numeroPagina >= totalPaginas ? "disabled" : "")">
+                <a class="page-link" href="@(numeroPagina >= totalPaginas ? "#" : Url.Action("ProductosAdmin", "Producto", new { numeropagina = paginaSiguiente }))">
+                    Siguiente &raquo;
+                </a>
+            </li>
+        </ul>
+    </nav>
+}

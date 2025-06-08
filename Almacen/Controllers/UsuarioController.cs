@@ -69,7 +69,7 @@ namespace Almacen.Controllers
         }
 
         // POST: IniciarSesion
-        [HttpPost] public ActionResult IniciarSesion(IniciarSesion model)
+        [HttpPost]public ActionResult IniciarSesion(IniciarSesion model)
         {
             if (!ModelState.IsValid)
                 return View(model);
@@ -86,12 +86,18 @@ namespace Almacen.Controllers
 
                 // Autenticación correcta: guarda datos en sesión
                 Session["usuario"] = usuario;
-                TempData["Exito"] = "Has iniciado sesión correctamente.";
-                return RedirectToAction("Registrar", "Usuario");
+                Session["idRol"] = usuario.idRol; // Asegúrate de guardar el rol aquí
+
+                // Redirige según el rol
+                if (usuario.idRol == 1)
+                    return RedirectToAction("ProductosAdmin", "Producto");
+                else if (usuario.idRol == 2)
+                    return RedirectToAction("ProductosUsuario", "Producto");
+                else
+                    return RedirectToAction("IniciarSesion", "Usuario");
             }
             catch (Exception ex)
             {
-                // Si el mensaje es el de cuenta pendiente, muestra el mensaje especial
                 if (ex.Message.Contains("Estado Pendiente."))
                 {
                     TempData["MensajePendiente"] = "Su cuenta está pendiente de revisión. Si tarda mucho, comuníquese con soporte.";
@@ -209,7 +215,18 @@ namespace Almacen.Controllers
             return RedirectToAction("IniciarSesion", "Usuario");
         }
 
+        public ActionResult CerrarSesion()
+        {
+            // Limpia toda la sesión
+            Session.Clear();
+            Session.Abandon();
 
+            // Opcional: Si quieres asegurarte de que idRol sea 0 explícitamente
+            Session["idRol"] = 0;
+
+            // Redirige al login o a la página principal
+            return RedirectToAction("IniciarSesion", "Usuario");
+        }
 
     }
 }

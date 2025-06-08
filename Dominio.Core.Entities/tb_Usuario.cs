@@ -23,7 +23,7 @@ namespace Dominio.Core.Entities
 
         [Display(Name = "Nº DNI", Order = 2)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Ingrese solo números")]
-        [RegularExpression(@"^\d{7}$", ErrorMessage = "Debe ingresar exactamente 7 dígitos numéricos")]
+        [RegularExpression(@"^\d{8}$", ErrorMessage = "Debe ingresar exactamente 8 dígitos numéricos")]
         public string dni { get; set; }
 
         [Display(Name = "Rol de usuario", Order = 3)]

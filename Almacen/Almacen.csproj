@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -144,6 +145,28 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\fotos\1.jpg" />
+    <Content Include="Content\fotos\10.jpg" />
+    <Content Include="Content\fotos\11.jpg" />
+    <Content Include="Content\fotos\12.jpg" />
+    <Content Include="Content\fotos\13.jpg" />
+    <Content Include="Content\fotos\14.jpg" />
+    <Content Include="Content\fotos\15.jpg" />
+    <Content Include="Content\fotos\16.jpg" />
+    <Content Include="Content\fotos\17.jpg" />
+    <Content Include="Content\fotos\18.jpg" />
+    <Content Include="Content\fotos\19.jpg" />
+    <Content Include="Content\fotos\2.jpg" />
+    <Content Include="Content\fotos\20.jpg" />
+    <Content Include="Content\fotos\21.jpg" />
+    <Content Include="Content\fotos\3.jpg" />
+    <Content Include="Content\fotos\4.jpg" />
+    <Content Include="Content\fotos\5.jpg" />
+    <Content Include="Content\fotos\6.jpg" />
+    <Content Include="Content\fotos\7.jpg" />
+    <Content Include="Content\fotos\8.jpg" />
+    <Content Include="Content\fotos\9.jpg" />
+    <Content Include="Content\fotos\default.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -185,6 +208,8 @@
     <Content Include="Views\Usuario\Confirmacion.cshtml" />
     <Content Include="Views\Usuario\RecuperarPassword.cshtml" />
     <Content Include="Views\Usuario\ActualizarPassword.cshtml" />
+    <Content Include="Views\Producto\ProductosUsuario.cshtml" />
+    <Content Include="Views\Producto\ProductosAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -218,17 +243,33 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dominio.Core.Entities\Dominio.Core.Entities.csproj">
+    <ProjectReference Include="..\Dominio.Core.Entities.Pedido\Dominio.Core.Entities.Pedido.csproj">
+      <Project>{c4b7e0e6-4f87-45e4-bc23-09c192d89e77}</Project>
+      <Name>Dominio.Core.Entities.Pedido</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dominio.Core.Entities.Producto\Dominio.Core.Entities.Producto.csproj">
+      <Project>{295875e8-af43-429d-abc2-bbf6f5ebd646}</Project>
+      <Name>Dominio.Core.Entities.Producto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dominio.Core.Entities\Dominio.Core.Entities.Login.csproj">
       <Project>{5cd463b0-6e31-4abe-a8be-a81b8d14ae26}</Project>
-      <Name>Dominio.Core.Entities</Name>
+      <Name>Dominio.Core.Entities.Login</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dominio.Core.MainModule\Dominio.Core.MainModule.csproj">
+    <ProjectReference Include="..\Dominio.Core.MainModule.Producto\Dominio.Core.MainModule.Producto.csproj">
+      <Project>{e9bbdde2-1fcb-4978-8063-5d12d36d1cad}</Project>
+      <Name>Dominio.Core.MainModule.Producto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dominio.Core.MainModule\Dominio.Core.MainModule.Login.csproj">
       <Project>{a966cabc-6295-48a5-b94f-84d61a5be7df}</Project>
-      <Name>Dominio.Core.MainModule</Name>
+      <Name>Dominio.Core.MainModule.Login</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Infraestructura.Data.SqlServer\Infraestructura.Data.SqlServer.csproj">
+    <ProjectReference Include="..\Infraestructura.Data.SqlServer.Producto\Infraestructura.Data.SqlServer.Producto.csproj">
+      <Project>{c4778b99-8e20-4289-b4f7-5a1f9d57612f}</Project>
+      <Name>Infraestructura.Data.SqlServer.Producto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infraestructura.Data.SqlServer\Infraestructura.Data.SqlServer.Login.csproj">
       <Project>{b66d20f5-7719-494b-925f-0dde90788682}</Project>
-      <Name>Infraestructura.Data.SqlServer</Name>
+      <Name>Infraestructura.Data.SqlServer.Login</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infraestructura.Helpers\Infraestructura.Helpers.csproj">
       <Project>{dc9ce9d9-77d8-40c9-83ff-e019ed3b965d}</Project>

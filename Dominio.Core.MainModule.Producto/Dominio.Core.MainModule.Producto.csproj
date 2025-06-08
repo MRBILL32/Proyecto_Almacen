@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A966CABC-6295-48A5-B94F-84D61A5BE7DF}</ProjectGuid>
+    <ProjectGuid>{E9BBDDE2-1FCB-4978-8063-5D12D36D1CAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dominio.Core.MainModule</RootNamespace>
-    <AssemblyName>Dominio.Core.MainModule</AssemblyName>
+    <RootNamespace>Dominio.Core.MainModule.Producto</RootNamespace>
+    <AssemblyName>Dominio.Core.MainModule.Producto</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,22 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoriaManager.cs" />
+    <Compile Include="ProductoManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RolManager.cs" />
-    <Compile Include="UsuarioManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dominio.Core.Entities\Dominio.Core.Entities.csproj">
-      <Project>{5cd463b0-6e31-4abe-a8be-a81b8d14ae26}</Project>
-      <Name>Dominio.Core.Entities</Name>
+    <ProjectReference Include="..\Dominio.Core.Entities.Producto\Dominio.Core.Entities.Producto.csproj">
+      <Project>{295875e8-af43-429d-abc2-bbf6f5ebd646}</Project>
+      <Name>Dominio.Core.Entities.Producto</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Infraestructura.Data.SqlServer\Infraestructura.Data.SqlServer.csproj">
-      <Project>{b66d20f5-7719-494b-925f-0dde90788682}</Project>
-      <Name>Infraestructura.Data.SqlServer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infraestructura.Helpers\Infraestructura.Helpers.csproj">
-      <Project>{dc9ce9d9-77d8-40c9-83ff-e019ed3b965d}</Project>
-      <Name>Infraestructura.Helpers</Name>
+    <ProjectReference Include="..\Infraestructura.Data.SqlServer.Producto\Infraestructura.Data.SqlServer.Producto.csproj">
+      <Project>{c4778b99-8e20-4289-b4f7-5a1f9d57612f}</Project>
+      <Name>Infraestructura.Data.SqlServer.Producto</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

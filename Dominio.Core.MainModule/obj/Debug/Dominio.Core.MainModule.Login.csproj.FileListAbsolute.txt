@@ -1,0 +1,13 @@
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule\bin\Debug\Dominio.Core.MainModule.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule\bin\Debug\Dominio.Core.MainModule.pdb
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule\bin\Debug\Dominio.Core.Entities.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule\bin\Debug\Infraestructura.Data.SqlServer.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule\bin\Debug\Infraestructura.Helpers.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule\bin\Debug\Dominio.Core.Entities.pdb
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule\bin\Debug\Infraestructura.Data.SqlServer.pdb
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule\bin\Debug\Infraestructura.Helpers.pdb
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule\obj\Debug\Dominio.Core.MainModule.Login.csproj.AssemblyReference.cache
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule\obj\Debug\Dominio.Core.MainModule.Login.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule\obj\Debug\Dominio..FB380FFB.Up2Date
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule\obj\Debug\Dominio.Core.MainModule.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule\obj\Debug\Dominio.Core.MainModule.pdb

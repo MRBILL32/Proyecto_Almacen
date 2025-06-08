@@ -280,3 +280,11 @@ C:\Users\Administrator\Desktop\Almacen\Almacen\obj\Debug\Almacen.csproj.CoreComp
 C:\Users\Administrator\Desktop\Almacen\Almacen\obj\Debug\Almacen.csproj.Up2Date
 C:\Users\Administrator\Desktop\Almacen\Almacen\obj\Debug\Almacen.dll
 C:\Users\Administrator\Desktop\Almacen\Almacen\obj\Debug\Almacen.pdb
+C:\Users\Administrator\Downloads\Almacen\Almacen\bin\Dominio.Core.Entities.Pedido.dll
+C:\Users\Administrator\Downloads\Almacen\Almacen\bin\Dominio.Core.Entities.Producto.dll
+C:\Users\Administrator\Downloads\Almacen\Almacen\bin\Dominio.Core.MainModule.Producto.dll
+C:\Users\Administrator\Downloads\Almacen\Almacen\bin\Infraestructura.Data.SqlServer.Producto.dll
+C:\Users\Administrator\Downloads\Almacen\Almacen\bin\Dominio.Core.Entities.Pedido.pdb
+C:\Users\Administrator\Downloads\Almacen\Almacen\bin\Dominio.Core.Entities.Producto.pdb
+C:\Users\Administrator\Downloads\Almacen\Almacen\bin\Dominio.Core.MainModule.Producto.pdb
+C:\Users\Administrator\Downloads\Almacen\Almacen\bin\Infraestructura.Data.SqlServer.Producto.pdb
