@@ -25,7 +25,7 @@ namespace Infraestructura.Data.SqlServer.Producto
                     {
                         tb_Categoria cat = new tb_Categoria()
                         {
-                            idCate = Convert.ToInt32(dr["idCate"]),
+                            IdCate = Convert.ToInt32(dr["idCate"]),
                             nomCate = dr["nomCate"].ToString()
                         };
                         categorias.Add(cat);

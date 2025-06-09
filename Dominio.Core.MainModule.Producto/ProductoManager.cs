@@ -31,7 +31,9 @@ namespace Dominio.Core.MainModule.Producto
             // Asignar imagen a cada producto
             foreach (var prod in productosPagina)
             {
-                string ruta = $"/Content/Fotos/{prod.IdProd}.jpg";
+                // Convierte el nombre a minúsculas y reemplaza espacios por guiones
+                string nombreImagen = prod.NomProd.ToLower().Replace(" ", "-") + ".jpg";
+                string ruta = $"/Content/Fotos/{nombreImagen}";
                 string rutaFisica = System.Web.HttpContext.Current.Server.MapPath(ruta);
 
                 if (System.IO.File.Exists(rutaFisica))
@@ -62,7 +64,9 @@ namespace Dominio.Core.MainModule.Producto
             // Asignar imagen a cada producto (opcional, si usas imágenes)
             foreach (var prod in productosPagina)
             {
-                string ruta = $"/Content/Fotos/{prod.IdProd}.jpg";
+                // Convierte el nombre a minúsculas y reemplaza espacios por guiones
+                string nombreImagen = prod.NomProd.ToLower().Replace(" ", "-") + ".jpg";
+                string ruta = $"/Content/Fotos/{nombreImagen}";
                 string rutaFisica = System.Web.HttpContext.Current.Server.MapPath(ruta);
 
                 if (System.IO.File.Exists(rutaFisica))
@@ -74,6 +78,16 @@ namespace Dominio.Core.MainModule.Producto
             return productosPagina;
         }
 
+
+        public void EliminarProducto(int idProd) 
+        {
+            producto.EliminarProducto(idProd);
+        }
+
+        public string ActualizarProducto(Tb_Producto productos)
+        {
+            return producto.ActualizarProducto(productos);
+        }
 
     }
 }

@@ -301,6 +301,16 @@ SET nomProd = @nomProd,
     precioUnit = @precioUnit,
     stock = @stock
 WHERE idProd = @idProd;
+
+-- Desactivar producto si el stock llega a cero
+UPDATE schProductos.Producto
+SET activo = 0
+WHERE idProd = @idProd AND stock = 0;
+
+-- Activar producto si el stock es mayor a cero
+UPDATE schProductos.Producto
+SET activo = 1
+WHERE idProd = @idProd AND stock > 0;
 GO
 
 -- Listar Productos (Admin)
@@ -347,38 +357,6 @@ WHERE
     OR P.marcaProd LIKE '%' + @busqueda + '%'
     OR C.nomCate LIKE '%' + @busqueda + '%'
     OR CAST(P.idProd AS NVARCHAR) = @busqueda;
-GO
-
--- Incrementar Stock
-CREATE OR ALTER PROCEDURE usp_IncrementarStock
-@idProd INT,
-@cantidad INT
-AS
-UPDATE schProductos.Producto
-SET stock = stock + @cantidad
-WHERE idProd = @idProd;
-UPDATE schProductos.Producto
-SET activo = 1
-WHERE idProd = @idProd AND stock > 0;
-GO
-
--- Decrementar Stock
-CREATE OR ALTER PROCEDURE usp_DecrementarStock
-@idProd INT,
-@cantidad INT
-AS
-BEGIN
-    DECLARE @stockActual INT, @descontado INT;
-    SELECT @stockActual = stock FROM schProductos.Producto WHERE idProd = @idProd AND activo = 1;
-    IF @stockActual IS NULL OR @stockActual = 0 RETURN;
-    SET @descontado = CASE WHEN @stockActual < @cantidad THEN @stockActual ELSE @cantidad END;
-    UPDATE schProductos.Producto
-    SET stock = stock - @descontado
-    WHERE idProd = @idProd AND activo = 1;
-    UPDATE schProductos.Producto
-    SET activo = 0
-    WHERE idProd = @idProd AND stock <= 0;
-END
 GO
 
 -- Tabla de Pedidos
@@ -483,6 +461,59 @@ BEGIN
 END
 GO
 
+-- Eliminar producto y pedido
+create or alter procedure usp_EliminarProducto
+	@idProd int
+as
+-- Elimina los detalles de pedido que usan este producto
+	delete from schPedidos.DetallePedido where idProd = @idProd
+-- Elimina el producto del catalogo
+	delete from schProductos.Producto where idProd = @idProd
+go
+
+-- Comprar Producto
+CREATE OR ALTER PROCEDURE usp_ComprarProducto
+    @idUser INT,
+    @idProd INT,
+    @cantidad INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Verificar stock disponible
+    DECLARE @stockActual INT, @precioUnit DECIMAL(10,2);
+    SELECT @stockActual = stock, @precioUnit = precioUnit
+    FROM schProductos.Producto
+    WHERE idProd = @idProd AND activo = 1;
+
+    IF @stockActual IS NULL OR @stockActual < @cantidad
+    BEGIN
+        RAISERROR('Stock insuficiente o producto inactivo.', 16, 1);
+        RETURN;
+    END
+
+    -- Crear el pedido
+    INSERT INTO schPedidos.Pedido (idUser, total, estado)
+    VALUES (@idUser, @precioUnit * @cantidad, 'Pendiente');
+
+    DECLARE @idPedido INT = SCOPE_IDENTITY();
+
+    -- Insertar detalle de pedido
+    INSERT INTO schPedidos.DetallePedido (idPedido, idProd, cantidad, precioUnit, subtotal)
+    VALUES (@idPedido, @idProd, @cantidad, @precioUnit, @precioUnit * @cantidad);
+
+    -- Descontar stock
+    UPDATE schProductos.Producto
+    SET stock = stock - @cantidad
+    WHERE idProd = @idProd;
+
+    -- Desactivar producto si stock llega a cero
+    UPDATE schProductos.Producto
+    SET activo = 0
+    WHERE idProd = @idProd AND stock <= 0;
+END;
+GO
+
 -- Historial de Pedidos por Usuario
 CREATE OR ALTER PROCEDURE usp_HistorialPedidosUsuario
 @idUser INT
@@ -511,7 +542,7 @@ EXEC usp_ListarUser
 EXEC usp_InicioSesion 'MRBILL32','D@k12345'
 go
 
-EXEC usp_InsertarProducto 'Yogurt Griego', 'Chobani', 1, 25.50, 30
+EXEC usp_InsertarProducto 'Yogurt Griego', 'Chobani', 1, 25.50, 30;
 EXEC usp_InsertarProducto 'Yogurt Natural', 'Gloria', 1, 3.50, 100;         -- Lacteos
 EXEC usp_InsertarProducto 'Leche Entera', 'Laive', 1, 4.20, 80;             -- Lacteos
 EXEC usp_InsertarProducto 'Queso Fresco', 'Bonlé', 1, 7.50, 60;             -- Lacteos

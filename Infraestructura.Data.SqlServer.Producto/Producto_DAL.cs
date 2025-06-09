@@ -75,7 +75,46 @@ namespace Infraestructura.Data.SqlServer.Producto
             }
             return temporal;
         }
+        public void EliminarProducto(int idProd) 
+        {
+            using (var cnx = cn.Conectar())
+            {
+                SqlCommand cmd = new SqlCommand("usp_EliminarProducto", cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idProd", idProd);
 
-     
+                cnx.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public string ActualizarProducto(Tb_Producto productos)
+        {
+            string mensaje = "";
+            using (var cnx = cn.Conectar())
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_ActualizarProducto", cnx);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@idProd", productos.IdProd);
+                    cmd.Parameters.AddWithValue("@nomProd", productos.NomProd);
+                    cmd.Parameters.AddWithValue("@marcaProd", productos.MarcaProd);
+                    cmd.Parameters.AddWithValue("@idCate", productos.IdCate);
+                    cmd.Parameters.AddWithValue("@precioUnit", productos.PrecioUnit);
+                    cmd.Parameters.AddWithValue("@stock", productos.Stock);
+
+                    cnx.Open();
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    mensaje = filasAfectadas > 0 ? "Producto actualizado correctamente." : "No se actualizó ningún producto.";
+                }
+                catch (SqlException ex)
+                {
+                    mensaje = "Error al actualizar: " + ex.Message;
+                }
+            }
+            return mensaje;
+        }
     }
 }

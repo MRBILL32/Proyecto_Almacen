@@ -21,13 +21,15 @@ namespace Dominio.Core.Entities.Producto
         [Required(AllowEmptyStrings = false, ErrorMessage = "Ingrese la Marca")]
         public string MarcaProd { get; set; }
 
+        [Display(Name = "Categoria", Order = 3)]
         public int IdCate { get; set; }
 
-        [Display(Name = "Categoria", Order = 3)]
+    
         public string NomCate { get; set; }
 
         [Display(Name = "Precio Unidad", Order = 4)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Ingrese un Precio por unidad")]
+        [Required(ErrorMessage = "El precio unitario es obligatorio.")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "El precio unitario debe ser mayor a 0.")]
         public decimal PrecioUnit { get; set; }
 
         [Display(Name = "Stock Disponible", Order = 5)]
