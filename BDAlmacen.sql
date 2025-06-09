@@ -327,7 +327,7 @@ CREATE OR ALTER PROCEDURE usp_ListaProducAdmin AS
 	FROM schProductos.Producto P join schProductos.Categoria C on P.idCate = C.idCate
 GO
 
--- Listar Productos Paginado
+-- Listar Productos (Clientes)
 CREATE OR ALTER PROCEDURE usp_listarProductos
 AS
 BEGIN
@@ -345,8 +345,25 @@ BEGIN
 END
 GO
 
--- Búsqueda General de Productos
-CREATE OR ALTER PROCEDURE usp_BuscarProductos
+-- Búsqueda productos usuarios (solo activos)
+CREATE OR ALTER PROCEDURE usp_BuscarProductosUsuario
+@busqueda NVARCHAR(200)
+AS
+SELECT nomProd, marcaProd, C.idCate, C.nomCate, precioUnit, stock
+FROM schProductos.Producto P
+JOIN schProductos.Categoria C ON P.idCate = C.idCate
+WHERE
+    (
+        P.nomProd LIKE '%' + @busqueda + '%'
+        OR P.marcaProd LIKE '%' + @busqueda + '%'
+        OR C.nomCate LIKE '%' + @busqueda + '%'
+        OR CAST(P.idProd AS NVARCHAR) = @busqueda
+    )
+    AND P.activo = 1;
+GO
+
+-- Búsqueda productos admin (todos)
+CREATE OR ALTER PROCEDURE usp_BuscarProductosAdmin
 @busqueda NVARCHAR(200)
 AS
 SELECT nomProd, marcaProd, C.idCate, C.nomCate, precioUnit, stock
@@ -356,7 +373,7 @@ WHERE
     P.nomProd LIKE '%' + @busqueda + '%'
     OR P.marcaProd LIKE '%' + @busqueda + '%'
     OR C.nomCate LIKE '%' + @busqueda + '%'
-    OR CAST(P.idProd AS NVARCHAR) = @busqueda;
+    OR CAST(P.idProd AS NVARCHAR) = @busqueda
 GO
 
 -- Tabla de Pedidos
@@ -377,6 +394,7 @@ select U.nombres,U.apellidos,U.dni,U.correo,fecha,total,P.estado
 go
 
 exec usp_listarPedidos
+go
 
 -- Crear Pedido
 CREATE OR ALTER PROCEDURE usp_CrearPedido

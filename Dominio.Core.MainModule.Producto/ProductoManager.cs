@@ -78,16 +78,32 @@ namespace Dominio.Core.MainModule.Producto
             return productosPagina;
         }
 
-
-        public void EliminarProducto(int idProd) 
+        public string InsertarProducto(Tb_Producto productos) 
         {
-            producto.EliminarProducto(idProd);
+            return producto.InsertarProducto(productos);
         }
 
         public string ActualizarProducto(Tb_Producto productos)
         {
             return producto.ActualizarProducto(productos);
         }
+
+        public IEnumerable<Tb_Producto> BuscarParaUsuario(string Busqueda) 
+        {
+            return producto.BuscarProductosUsuario(Busqueda);
+        }
+
+        public IEnumerable<Tb_Producto> BuscarParaAdmin(string Busqueda)
+        {
+            return producto.BuscarProductosAdmin(Busqueda);
+        }
+
+        public void EliminarProducto(int idProd) 
+        {
+            producto.EliminarProducto(idProd);
+        }
+
+    
 
     }
 }

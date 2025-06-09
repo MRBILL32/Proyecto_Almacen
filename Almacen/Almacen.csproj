@@ -145,6 +145,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\fotos\nintendo-switch-2.jpg" />
     <Content Include="Content\fotos\yogurt-griego.jpg" />
     <Content Include="Content\fotos\café-instantáneo.jpg" />
     <Content Include="Content\fotos\gaseosa-1.5l.jpg" />
@@ -211,6 +212,7 @@
     <Content Include="Views\Producto\ProductosUsuario.cshtml" />
     <Content Include="Views\Producto\ProductosAdmin.cshtml" />
     <Content Include="Views\Producto\Editar.cshtml" />
+    <Content Include="Views\Producto\InsertarProducto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

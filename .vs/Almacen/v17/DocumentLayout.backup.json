@@ -5,6 +5,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|c:\\users\\administrator\\downloads\\almacen\\almacen\\views\\usuario\\iniciarsesion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|solutionrelative:almacen\\views\\usuario\\iniciarsesion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C4778B99-8E20-4289-B4F7-5A1F9D57612F}|Infraestructura.Data.SqlServer.Producto\\Infraestructura.Data.SqlServer.Producto.csproj|c:\\users\\administrator\\downloads\\almacen\\infraestructura.data.sqlserver.producto\\producto_dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C4778B99-8E20-4289-B4F7-5A1F9D57612F}|Infraestructura.Data.SqlServer.Producto\\Infraestructura.Data.SqlServer.Producto.csproj|solutionrelative:infraestructura.data.sqlserver.producto\\producto_dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|c:\\users\\administrator\\downloads\\almacen\\almacen\\views\\producto\\productosadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|solutionrelative:almacen\\views\\producto\\productosadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +22,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Producto_DAL.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\Infraestructura.Data.SqlServer.Producto\\Producto_DAL.cs",
+              "RelativeDocumentMoniker": "Infraestructura.Data.SqlServer.Producto\\Producto_DAL.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\Infraestructura.Data.SqlServer.Producto\\Producto_DAL.cs",
+              "RelativeToolTip": "Infraestructura.Data.SqlServer.Producto\\Producto_DAL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T18:45:07.044Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProductosAdmin.cshtml",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Views\\Producto\\ProductosAdmin.cshtml",
+              "RelativeDocumentMoniker": "Almacen\\Views\\Producto\\ProductosAdmin.cshtml",
+              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Views\\Producto\\ProductosAdmin.cshtml",
+              "RelativeToolTip": "Almacen\\Views\\Producto\\ProductosAdmin.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-09T18:44:03.409Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,9 +58,9 @@
               "RelativeDocumentMoniker": "Almacen\\Views\\Usuario\\IniciarSesion.cshtml",
               "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Views\\Usuario\\IniciarSesion.cshtml",
               "RelativeToolTip": "Almacen\\Views\\Usuario\\IniciarSesion.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAQwCQAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-08T23:13:38.6Z",
+              "WhenOpened": "2025-06-09T18:42:53.962Z",
               "EditorCaption": ""
             },
             {

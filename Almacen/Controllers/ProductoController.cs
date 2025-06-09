@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Dominio.Core.Entities.Producto;
 using Dominio.Core.MainModule.Producto;
+using Infraestructura.Data.SqlServer.Producto;
 
 namespace Almacen.Controllers
 {
@@ -50,10 +51,34 @@ namespace Almacen.Controllers
             return View("ProductosUsuario", productosPagina);
         }
 
-        [HttpPost] public ActionResult Eliminar(int idProd)
+        // GET
+        public ActionResult InsertarProducto() 
         {
-            productos.EliminarProducto(idProd);
-            return RedirectToAction("ProductosAdmin");
+            //cargar las categorias para el dropdown
+            ViewBag.Categorias = new SelectList(categorias.ListarCategorias(), "IdCate", "NomCate");
+            return View();
+        }
+
+        //POST
+        [HttpPost]
+        public ActionResult InsertarProducto(Tb_Producto producto) 
+        {
+            if (ModelState.IsValid) 
+            {
+                //asignar imagen por defecto
+                producto.ImagenUrl = "/Content/Fotos/default.jpg";
+
+                //llama al DAL para Agregar el producto
+                var productos = new Producto_DAL();
+                string mensaje = productos.InsertarProducto(producto);
+
+                TempData["Mensaje"] = mensaje;
+                return RedirectToAction("ProductosAdmin");
+            }
+
+            //si hay error, recarga las categorias para el dropdown
+            ViewBag.Categorias = new SelectList(categorias.ListarCategorias(), "IdCate", "NomCate");
+            return View(producto);
         }
 
         public ActionResult Editar(int id)
@@ -94,5 +119,33 @@ namespace Almacen.Controllers
 
             return View(producto);
         }
+
+
+        public ActionResult Buscar(string busqueda)
+        {
+            var producto = new ProductoManager();
+            IEnumerable<Tb_Producto> resultado;
+
+            if (User.IsInRole("Admin"))
+            {
+                resultado = producto.BuscarParaAdmin(busqueda);
+                return View("ProductosAdmin", resultado);
+            }
+            else
+            {
+                resultado = producto.BuscarParaUsuario(busqueda);
+                return View("ProductosUsuario", resultado); // O el nombre de tu vista de usuario
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Eliminar(int idProd)
+        {
+            productos.EliminarProducto(idProd);
+            return RedirectToAction("ProductosAdmin");
+        }
+
+
+
     }
 }

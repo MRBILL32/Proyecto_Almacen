@@ -75,16 +75,34 @@ namespace Infraestructura.Data.SqlServer.Producto
             }
             return temporal;
         }
-        public void EliminarProducto(int idProd) 
+
+        public string InsertarProducto(Tb_Producto producto) 
         {
+            string mensaje = "";
             using (var cnx = cn.Conectar())
             {
-                SqlCommand cmd = new SqlCommand("usp_EliminarProducto", cnx);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@idProd", idProd);
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_InsertarProducto", cnx);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                cnx.Open();
-                cmd.ExecuteNonQuery();
+                    cmd.Parameters.AddWithValue("@nomProd", producto.NomProd);
+                    cmd.Parameters.AddWithValue("@marcaProd", producto.MarcaProd);
+                    cmd.Parameters.AddWithValue("@idCate", producto.IdCate);
+                    cmd.Parameters.AddWithValue("@precioUnit", producto.PrecioUnit);
+                    cmd.Parameters.AddWithValue("@stock", producto.Stock);
+
+                    cnx.Open();
+                    int filasAfectadas = cmd.ExecuteNonQuery();
+                    mensaje = filasAfectadas > 0 ? "Producto agregado correctamente." : "no se agrego el producto.";
+
+                }
+                catch (SqlException ex)
+                {
+
+                    mensaje = "Error al agregar producto: " + ex.Message;
+                }
+                return mensaje;
             }
         }
 
@@ -116,5 +134,81 @@ namespace Infraestructura.Data.SqlServer.Producto
             }
             return mensaje;
         }
+
+        // Para usuarios: solo productos activos
+        public IEnumerable<Tb_Producto> BuscarProductosUsuario(string busqueda)
+        {
+            List<Tb_Producto> lista = new List<Tb_Producto>();
+            using (var cnx = cn.Conectar())
+            {
+                SqlCommand cmd = new SqlCommand("usp_BuscarProductosUsuario", cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@busqueda", busqueda);
+
+                cnx.Open();
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Tb_Producto prod = new Tb_Producto()
+                        {
+                            NomProd = dr["nomProd"].ToString(),
+                            MarcaProd = dr["marcaProd"].ToString(),
+                            IdCate = Convert.ToInt32(dr["idCate"]),
+                            NomCate = dr["nomCate"].ToString(),
+                            PrecioUnit = Convert.ToDecimal(dr["precioUnit"]),
+                            Stock = Convert.ToInt16(dr["stock"])
+                        };
+                        lista.Add(prod);
+                    }
+                }
+            }
+            return lista;
+        }
+
+        // Para admin: todos los productos
+        public IEnumerable<Tb_Producto> BuscarProductosAdmin(string busqueda)
+        {
+            List<Tb_Producto> lista = new List<Tb_Producto>();
+            using (var cnx = cn.Conectar())
+            {
+                SqlCommand cmd = new SqlCommand("usp_BuscarProductos", cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@busqueda", busqueda);
+
+                cnx.Open();
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Tb_Producto prod = new Tb_Producto()
+                        {
+                            NomProd = dr["nomProd"].ToString(),
+                            MarcaProd = dr["marcaProd"].ToString(),
+                            IdCate = Convert.ToInt32(dr["idCate"]),
+                            NomCate = dr["nomCate"].ToString(),
+                            PrecioUnit = Convert.ToDecimal(dr["precioUnit"]),
+                            Stock = Convert.ToInt16(dr["stock"])
+                        };
+                        lista.Add(prod);
+                    }
+                }
+            }
+            return lista;
+        }
+        public void EliminarProducto(int idProd) 
+        {
+            using (var cnx = cn.Conectar())
+            {
+                SqlCommand cmd = new SqlCommand("usp_EliminarProducto", cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idProd", idProd);
+
+                cnx.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+       
     }
 }

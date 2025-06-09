@@ -11,11 +11,20 @@
         color: #666 !important;
         pointer-events: none;
     }
+
     .agotado-img {
         filter: grayscale(100%) brightness(80%);
         opacity: 0.7;
     }
 </style>
+
+<!-- Barra de búsqueda -->
+<form method="get" action="@Url.Action("Buscar", "Producto")" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="busqueda" class="form-control" placeholder="Buscar por nombre, marca, categoría o ID" value="@ViewBag.Busqueda" />
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+</form>
 
 <div class="row">
     @foreach (var item in Model)
