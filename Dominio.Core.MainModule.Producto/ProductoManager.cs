@@ -88,22 +88,29 @@ namespace Dominio.Core.MainModule.Producto
             return producto.ActualizarProducto(productos);
         }
 
-        public IEnumerable<Tb_Producto> BuscarParaUsuario(string Busqueda) 
+        public IEnumerable<Tb_Producto> BuscarParaUsuario(string busqueda, int numeroPagina, int registrosPorPagina, out int totalPaginas)
         {
-            return producto.BuscarProductosUsuario(Busqueda);
+            int totalRegistros;
+            var productos = producto.BuscarProductosUsuario(busqueda, numeroPagina, registrosPorPagina, out totalRegistros);
+
+            totalPaginas = (int)Math.Ceiling((double)totalRegistros / registrosPorPagina);
+
+            return productos;
         }
 
-        public IEnumerable<Tb_Producto> BuscarParaAdmin(string Busqueda)
+        public IEnumerable<Tb_Producto> BuscarParaAdmin(string busqueda, int numeroPagina, int registrosPorPagina, out int totalPaginas)
         {
-            return producto.BuscarProductosAdmin(Busqueda);
+            int totalRegistros;
+            var productos = producto.BuscarProductosAdmin(busqueda, numeroPagina, registrosPorPagina, out totalRegistros);
+
+            totalPaginas = (int)Math.Ceiling((double)totalRegistros / registrosPorPagina);
+
+            return productos;
         }
 
         public void EliminarProducto(int idProd) 
         {
             producto.EliminarProducto(idProd);
         }
-
-    
-
     }
 }

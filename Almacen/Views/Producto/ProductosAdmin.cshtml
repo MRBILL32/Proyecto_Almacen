@@ -20,6 +20,13 @@
     </div>
 </form>
 
+@if (ViewBag.Alerta != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Alerta
+    </div>
+}
+
 <!-- Botón de añadir producto solo para admin -->
 <div class="mb-3">
     <a href="@Url.Action("InsertarProducto", "Producto")" class="btn btn-success">
@@ -27,54 +34,61 @@
     </a>
 </div>
 
-
-
-<div class="row">
-    @foreach (var item in Model)
-    {
-        string imagenUrl;
-        if (item.Stock == 0)
+@if (!Model.Any())
+{
+    <div class="alert alert-danger" role="alert">
+        No se encontraron productos que coincidan con la búsqueda.
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach (var item in Model)
         {
-            imagenUrl = "/Content/Fotos/default.jpg";
-        }
-        else
-        {
-            string nombreImagen = item.NomProd.ToLower().Replace(" ", "-") + ".jpg";
-            string rutaRelativa = "/Content/Fotos/" + nombreImagen;
-            string rutaFisica = System.Web.HttpContext.Current.Server.MapPath(rutaRelativa);
-            imagenUrl = System.IO.File.Exists(rutaFisica)
-                ? rutaRelativa
-                : "/Content/Fotos/default.jpg";
-        }
-        <div class="col-md-3 col-sm-6 mb-4">
-            <div class="card h-100 shadow-sm">
-                <img src="@Url.Content(imagenUrl)"
-                     class="card-img-top"
-                     alt="Imagen de @item.NomProd"
-                     style="height:180px; object-fit:cover;">
-                <div class="card-body d-flex flex-column">
-                    <h6 class="card-subtitle mb-2 text-muted">ID: @item.IdProd</h6>
-                    <h5 class="card-title">@item.NomProd</h5>
-                    <p class="card-text mb-1"><strong>Marca:</strong> @item.MarcaProd</p>
-                    <p class="card-text mb-1"><strong>Categoría:</strong> @item.NomCate</p>
-                    <p class="card-text mb-1"><strong>Precio:</strong> S/. @item.PrecioUnit.ToString("N2")</p>
-                    <p class="card-text mb-1"><strong>Stock:</strong> @item.Stock</p>
-                    <p class="card-text mb-2"><strong>Activo:</strong> @(item.Activo ? "Sí" : "No")</p>
-                    <div class="mt-auto">
-                        <a href="@Url.Action("Editar", "Producto", new { id = item.IdProd })"
-                           class="btn btn-warning btn-sm mb-1 w-100">
-                            Editar
-                        </a>
-                        @using (Html.BeginForm("Eliminar", "Producto", new { idProd = item.IdProd }, FormMethod.Post, new { onsubmit = "return confirm('¿Seguro que deseas eliminar este producto?');" }))
-                        {
-                            <button type="submit" class="btn btn-danger btn-sm w-100">Eliminar</button>
-                        }
+            string imagenUrl;
+            if (item.Stock == 0)
+            {
+                imagenUrl = "/Content/Fotos/default.jpg";
+            }
+            else
+            {
+                string nombreImagen = item.NomProd.ToLower().Replace(" ", "-") + ".jpg";
+                string rutaRelativa = "/Content/Fotos/" + nombreImagen;
+                string rutaFisica = System.Web.HttpContext.Current.Server.MapPath(rutaRelativa);
+                imagenUrl = System.IO.File.Exists(rutaFisica)
+                    ? rutaRelativa
+                    : "/Content/Fotos/default.jpg";
+            }
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="@Url.Content(imagenUrl)"
+                         class="card-img-top"
+                         alt="Imagen de @item.NomProd"
+                         style="height:180px; object-fit:cover;">
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-subtitle mb-2 text-muted">ID: @item.IdProd</h6>
+                        <h5 class="card-title">@item.NomProd</h5>
+                        <p class="card-text mb-1"><strong>Marca:</strong> @item.MarcaProd</p>
+                        <p class="card-text mb-1"><strong>Categoría:</strong> @item.NomCate</p>
+                        <p class="card-text mb-1"><strong>Precio:</strong> S/. @item.PrecioUnit.ToString("N2")</p>
+                        <p class="card-text mb-1"><strong>Stock:</strong> @item.Stock</p>
+                        <p class="card-text mb-2"><strong>Activo:</strong> @(item.Activo ? "Sí" : "No")</p>
+                        <div class="mt-auto">
+                            <a href="@Url.Action("Editar", "Producto", new { id = item.IdProd })"
+                               class="btn btn-warning btn-sm mb-1 w-100">
+                                Editar
+                            </a>
+                            @using (Html.BeginForm("Eliminar", "Producto", new { idProd = item.IdProd }, FormMethod.Post, new { onsubmit = "return confirm('¿Seguro que deseas eliminar este producto?');" }))
+                            {
+                                <button type="submit" class="btn btn-danger btn-sm w-100">Eliminar</button>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>
+}
 
 @{
     int numeroPagina = ViewBag.NumeroPagina is int ? (int)ViewBag.NumeroPagina : 1;
@@ -88,7 +102,7 @@
     <nav aria-label="Paginación">
         <ul class="pagination justify-content-center">
             <li class="page-item @(numeroPagina <= 1 ? "disabled" : "")">
-                <a class="page-link" href="@(numeroPagina <= 1 ? "#" : Url.Action("ProductosAdmin", "Producto", new { numeropagina = paginaAnterior }))" tabindex="-1">
+                <a class="page-link" href="@(numeroPagina <= 1 ? "#" : Url.Action("Buscar", "Producto", new { busqueda = ViewBag.Busqueda, numeropagina = paginaAnterior }))" tabindex="-1">
                     &laquo; Anterior
                 </a>
             </li>
@@ -104,13 +118,13 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" href="@Url.Action("ProductosAdmin", "Producto", new { numeropagina = i })">@i</a>
+                        <a class="page-link" href="@Url.Action("Buscar", "Producto", new { busqueda = ViewBag.Busqueda, numeropagina = i })">@i</a>
                     </li>
                 }
             }
 
             <li class="page-item @(numeroPagina >= totalPaginas ? "disabled" : "")">
-                <a class="page-link" href="@(numeroPagina >= totalPaginas ? "#" : Url.Action("ProductosAdmin", "Producto", new { numeropagina = paginaSiguiente }))">
+                <a class="page-link" href="@(numeroPagina >= totalPaginas ? "#" : Url.Action("Buscar", "Producto", new { busqueda = ViewBag.Busqueda, numeropagina = paginaSiguiente }))">
                     Siguiente &raquo;
                 </a>
             </li>

@@ -120,24 +120,54 @@ namespace Almacen.Controllers
             return View(producto);
         }
 
-
-        public ActionResult Buscar(string busqueda)
+        public ActionResult Buscar(string busqueda, int numeropagina = 1)
         {
             var producto = new ProductoManager();
-            IEnumerable<Tb_Producto> resultado;
+            int registrosPorPagina = 12;
+            int totalPaginas;
 
-            if (User.IsInRole("Admin"))
+            if (numeropagina < 1) numeropagina = 1;
+
+            bool busquedaIgnorada = false;
+
+            // Evitar búsqueda por ID numérico
+            if (int.TryParse(busqueda, out int _))
             {
-                resultado = producto.BuscarParaAdmin(busqueda);
-                return View("ProductosAdmin", resultado);
+                busqueda = ""; // O cualquier valor que no afecte la búsqueda
+                busquedaIgnorada = true;
+            }
+
+            // Usar Session para determinar rol
+            int? idRol = Session["idRol"] as int?;
+            IEnumerable<Tb_Producto> productosPagina;
+
+            if (idRol == 1) // Asumiendo 1 es Admin
+            {
+                productosPagina = producto.BuscarParaAdmin(busqueda, numeropagina, registrosPorPagina, out totalPaginas);
             }
             else
             {
-                resultado = producto.BuscarParaUsuario(busqueda);
-                return View("ProductosUsuario", resultado); // O el nombre de tu vista de usuario
+                productosPagina = producto.BuscarParaUsuario(busqueda, numeropagina, registrosPorPagina, out totalPaginas);
             }
-        }
 
+            if (totalPaginas == 0) totalPaginas = 1;
+            if (numeropagina > totalPaginas) numeropagina = totalPaginas;
+
+            ViewBag.NumeroPagina = numeropagina;
+            ViewBag.TotalPaginas = totalPaginas;
+            ViewBag.Busqueda = busqueda;
+
+            if (!productosPagina.Any())
+                ViewBag.Mensaje = "Artículo no encontrado";
+
+            if (busquedaIgnorada)
+                ViewBag.Alerta = "La búsqueda por número ID no está permitida y fue ignorada.";
+
+            if (idRol == 1)
+                return View("ProductosAdmin", productosPagina);
+            else
+                return View("ProductosUsuario", productosPagina);
+        }
         [HttpPost]
         public ActionResult Eliminar(int idProd)
         {

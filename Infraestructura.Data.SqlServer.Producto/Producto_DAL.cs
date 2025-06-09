@@ -136,14 +136,27 @@ namespace Infraestructura.Data.SqlServer.Producto
         }
 
         // Para usuarios: solo productos activos
-        public IEnumerable<Tb_Producto> BuscarProductosUsuario(string busqueda)
+        public IEnumerable<Tb_Producto> BuscarProductosUsuario(string busqueda, int numeroPagina, int registrosPorPagina, out int totalRegistros)
         {
             List<Tb_Producto> lista = new List<Tb_Producto>();
+            totalRegistros = 0;
+
+            // Validar parámetros
+            if (numeroPagina <= 0) numeroPagina = 1;
+            if (registrosPorPagina <= 0) registrosPorPagina = 12; // o el valor que consideres por defecto
+
             using (var cnx = cn.Conectar())
             {
-                SqlCommand cmd = new SqlCommand("usp_BuscarProductosUsuario", cnx);
+                SqlCommand cmd = new SqlCommand("usp_BuscarProductosUsuarioPag", cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
+
                 cmd.Parameters.AddWithValue("@busqueda", busqueda);
+                cmd.Parameters.AddWithValue("@numeroPagina", numeroPagina);
+                cmd.Parameters.AddWithValue("@registrosPorPagina", registrosPorPagina);
+
+                SqlParameter totalParam = new SqlParameter("@totalRegistros", SqlDbType.Int);
+                totalParam.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(totalParam);
 
                 cnx.Open();
                 using (SqlDataReader dr = cmd.ExecuteReader())
@@ -152,6 +165,7 @@ namespace Infraestructura.Data.SqlServer.Producto
                     {
                         Tb_Producto prod = new Tb_Producto()
                         {
+                            IdProd = Convert.ToInt32(dr["idProd"]), // <-- Agrega esta línea
                             NomProd = dr["nomProd"].ToString(),
                             MarcaProd = dr["marcaProd"].ToString(),
                             IdCate = Convert.ToInt32(dr["idCate"]),
@@ -162,19 +176,35 @@ namespace Infraestructura.Data.SqlServer.Producto
                         lista.Add(prod);
                     }
                 }
+
+                totalRegistros = (int)totalParam.Value;
             }
+
             return lista;
         }
 
         // Para admin: todos los productos
-        public IEnumerable<Tb_Producto> BuscarProductosAdmin(string busqueda)
+        public IEnumerable<Tb_Producto> BuscarProductosAdmin(string busqueda, int numeroPagina, int registrosPorPagina, out int totalRegistros)
         {
             List<Tb_Producto> lista = new List<Tb_Producto>();
+            totalRegistros = 0;
+
+            // Validar parámetros
+            if (numeroPagina <= 0) numeroPagina = 1;
+            if (registrosPorPagina <= 0) registrosPorPagina = 12; // o el valor que consideres por defecto
+
             using (var cnx = cn.Conectar())
             {
-                SqlCommand cmd = new SqlCommand("usp_BuscarProductos", cnx);
+                SqlCommand cmd = new SqlCommand("usp_BuscarProductosAdminPag", cnx);
                 cmd.CommandType = CommandType.StoredProcedure;
+
                 cmd.Parameters.AddWithValue("@busqueda", busqueda);
+                cmd.Parameters.AddWithValue("@numeroPagina", numeroPagina);
+                cmd.Parameters.AddWithValue("@registrosPorPagina", registrosPorPagina);
+
+                SqlParameter totalParam = new SqlParameter("@totalRegistros", SqlDbType.Int);
+                totalParam.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(totalParam);
 
                 cnx.Open();
                 using (SqlDataReader dr = cmd.ExecuteReader())
@@ -183,19 +213,25 @@ namespace Infraestructura.Data.SqlServer.Producto
                     {
                         Tb_Producto prod = new Tb_Producto()
                         {
+                            IdProd = Convert.ToInt32(dr["idProd"]),
                             NomProd = dr["nomProd"].ToString(),
                             MarcaProd = dr["marcaProd"].ToString(),
                             IdCate = Convert.ToInt32(dr["idCate"]),
                             NomCate = dr["nomCate"].ToString(),
                             PrecioUnit = Convert.ToDecimal(dr["precioUnit"]),
-                            Stock = Convert.ToInt16(dr["stock"])
+                            Stock = Convert.ToInt16(dr["stock"]),
+                            Activo = Convert.ToBoolean(dr["activo"])
                         };
                         lista.Add(prod);
                     }
                 }
+
+                totalRegistros = (int)totalParam.Value;
             }
+
             return lista;
         }
+
         public void EliminarProducto(int idProd) 
         {
             using (var cnx = cn.Conectar())

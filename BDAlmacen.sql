@@ -345,38 +345,83 @@ BEGIN
 END
 GO
 
--- Búsqueda productos usuarios (solo activos)
-CREATE OR ALTER PROCEDURE usp_BuscarProductosUsuario
-@busqueda NVARCHAR(200)
+CREATE OR ALTER PROCEDURE usp_BuscarProductosUsuarioPag
+    @busqueda NVARCHAR(200) = NULL,
+    @numeroPagina INT,
+    @registrosPorPagina INT,
+    @totalRegistros INT OUTPUT
 AS
-SELECT nomProd, marcaProd, C.idCate, C.nomCate, precioUnit, stock
-FROM schProductos.Producto P
-JOIN schProductos.Categoria C ON P.idCate = C.idCate
-WHERE
-    (
-        P.nomProd LIKE '%' + @busqueda + '%'
-        OR P.marcaProd LIKE '%' + @busqueda + '%'
-        OR C.nomCate LIKE '%' + @busqueda + '%'
-        OR CAST(P.idProd AS NVARCHAR) = @busqueda
-    )
-    AND P.activo = 1;
+BEGIN
+    SET NOCOUNT ON;
+
+    IF @busqueda IS NULL OR LTRIM(RTRIM(@busqueda)) = ''
+        SET @busqueda = '%';
+    ELSE
+        SET @busqueda = '%' + @busqueda + '%';
+
+    -- Calcular total de registros activos que coinciden con la búsqueda
+    SELECT @totalRegistros = COUNT(*)
+    FROM schProductos.Producto P
+    JOIN schProductos.Categoria C ON P.idCate = C.idCate
+    WHERE
+        (
+            P.nomProd LIKE @busqueda
+            OR P.marcaProd LIKE @busqueda
+            OR C.nomCate LIKE @busqueda
+        )
+        AND P.activo = 1;
+
+    -- Obtener registros paginados activos ordenados por idProd y nomProd
+    SELECT P.idProd, P.nomProd, P.marcaProd, C.idCate, C.nomCate, P.precioUnit, P.stock
+    FROM schProductos.Producto P
+    JOIN schProductos.Categoria C ON P.idCate = C.idCate
+    WHERE
+        (
+            P.nomProd LIKE @busqueda
+            OR P.marcaProd LIKE @busqueda
+            OR C.nomCate LIKE @busqueda
+        )
+        AND P.activo = 1
+    ORDER BY P.idProd ASC, P.nomProd ASC
+    OFFSET (@numeroPagina - 1) * @registrosPorPagina ROWS
+    FETCH NEXT @registrosPorPagina ROWS ONLY;
+END;
 GO
 
--- Búsqueda productos admin (todos)
-CREATE OR ALTER PROCEDURE usp_BuscarProductosAdmin
-@busqueda NVARCHAR(200)
+CREATE OR ALTER PROCEDURE usp_BuscarProductosAdminPag
+    @busqueda NVARCHAR(200) = NULL,
+    @numeroPagina INT,
+    @registrosPorPagina INT,
+    @totalRegistros INT OUTPUT
 AS
-SELECT nomProd, marcaProd, C.idCate, C.nomCate, precioUnit, stock
-FROM schProductos.Producto P
-JOIN schProductos.Categoria C ON P.idCate = C.idCate
-WHERE
-    P.nomProd LIKE '%' + @busqueda + '%'
-    OR P.marcaProd LIKE '%' + @busqueda + '%'
-    OR C.nomCate LIKE '%' + @busqueda + '%'
-    OR CAST(P.idProd AS NVARCHAR) = @busqueda
+BEGIN
+    SET NOCOUNT ON;
+
+    IF @busqueda IS NULL OR LTRIM(RTRIM(@busqueda)) = ''
+        SET @busqueda = '%';
+    ELSE
+        SET @busqueda = '%' + @busqueda + '%';
+
+    SELECT @totalRegistros = COUNT(*)
+    FROM schProductos.Producto P JOIN schProductos.Categoria C ON P.idCate = C.idCate
+    WHERE
+        P.nomProd LIKE @busqueda
+        OR P.marcaProd LIKE @busqueda
+        OR C.nomCate LIKE @busqueda
+
+    SELECT P.idProd, P.nomProd, P.marcaProd, C.idCate, C.nomCate, P.precioUnit, P.stock, P.activo
+    FROM schProductos.Producto P
+    JOIN schProductos.Categoria C ON P.idCate = C.idCate
+    WHERE
+        P.nomProd LIKE @busqueda
+        OR P.marcaProd LIKE @busqueda
+        OR C.nomCate LIKE @busqueda
+    ORDER BY P.idProd ASC, P.nomProd ASC
+    OFFSET (@numeroPagina - 1) * @registrosPorPagina ROWS
+    FETCH NEXT @registrosPorPagina ROWS ONLY;
+END;
 GO
 
--- Tabla de Pedidos
 CREATE TABLE schPedidos.Pedido
 (
     idPedido INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
