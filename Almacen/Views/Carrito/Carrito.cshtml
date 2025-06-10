@@ -1,0 +1,65 @@
+﻿@model List<Dominio.Core.Entities.Carrito.Tb_DetalleCarrito>
+
+@{
+    ViewBag.Title = "Carrito de Compras";
+}
+
+<h2>Carrito de Compras</h2>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-danger">@TempData["Mensaje"]</div>
+}
+
+@if (!Model.Any())
+{
+    <p>El carrito está vacío.</p>
+    <a href="@Url.Action("ProductosUsuario", "Producto")" class="btn btn-secondary ms-2">Regresar</a>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Marca</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.NomProd</td>
+                    <td>@item.MarcaProd</td>
+                    <td>@item.Cantidad</td>
+                    <td>@item.PrecioUnit.ToString("N2")</td>
+                    <td>@item.Subtotal.ToString("N2")</td>
+                    <td>
+                        @using (Html.BeginForm("Eliminar", "Carrito", FormMethod.Post))
+                        {
+                            @Html.Hidden("idProd", item.IdProd)
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="d-flex gap-2">
+        <form method="post" action="@Url.Action("Vaciar", "Carrito")" onsubmit="return confirm('¿Seguro que quieres vaciar el carrito?');">
+            <button type="submit" class="btn btn-warning">Vaciar Carrito</button>
+        </form>
+
+        <form method="post" action="@Url.Action("ConfirmarCompra", "Carrito")" onsubmit="return confirm('¿Desea confirmar la compra?');">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-success">Confirmar Compra</button>
+        </form>
+
+        <a href="@Url.Action("ProductosUsuario", "Producto")" class="btn btn-secondary">Regresar</a>
+    </div>
+}

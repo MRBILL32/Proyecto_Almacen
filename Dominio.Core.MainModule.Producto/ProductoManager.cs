@@ -108,9 +108,14 @@ namespace Dominio.Core.MainModule.Producto
             return productos;
         }
 
-        public void EliminarProducto(int idProd) 
+        public void EliminarProducto(int idProd)
         {
             producto.EliminarProducto(idProd);
+        }
+
+        public Tb_Producto BuscarProductoPorId(int idProd)
+        {
+            return new Producto_DAL().BuscarProductoPorId(idProd);
         }
     }
 }

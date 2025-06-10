@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Dominio.Core.Entities.Producto;
+using Dominio.Core.MainModule.Carrito;
 using Dominio.Core.MainModule.Producto;
 using Infraestructura.Data.SqlServer.Producto;
 
@@ -13,6 +14,7 @@ namespace Almacen.Controllers
     {
         ProductoManager productos = new ProductoManager();
         CategoriaManager categorias = new CategoriaManager();
+        CarritoManager carrito = new CarritoManager();
 
         public ActionResult ProductosAdmin(int numeropagina = 1)
         {
@@ -168,6 +170,7 @@ namespace Almacen.Controllers
             else
                 return View("ProductosUsuario", productosPagina);
         }
+        
         [HttpPost]
         public ActionResult Eliminar(int idProd)
         {
@@ -175,6 +178,37 @@ namespace Almacen.Controllers
             return RedirectToAction("ProductosAdmin");
         }
 
+        //agregar producto al carrito
+        public ActionResult Comprar(int id)
+        {
+            var producto = productos.BuscarProductoPorId(id); // actualizado
+
+            if (producto == null)
+            {
+                return HttpNotFound("Producto no encontrado");
+            }
+
+            return View("Comprar", producto);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Comprar(int idProd, int cantidad)
+        {
+            if (Session["usuario"] == null)
+                return RedirectToAction("IniciarSesion", "Usuario");
+
+            dynamic usuario = Session["usuario"];
+            int idUser = usuario.idUser;
+
+            int idCarrito = carrito.CrearCarrito(idUser);
+            string mensaje = carrito.AgregarProductoCarrito(idCarrito, idProd, cantidad);
+
+            TempData["Mensaje"] = mensaje;
+
+            // Redirige a la misma página o a la lista de productos para seguir comprando
+            return RedirectToAction("ProductosUsuario");
+        }
 
 
     }

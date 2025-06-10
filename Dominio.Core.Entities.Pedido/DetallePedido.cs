@@ -11,8 +11,12 @@ namespace Dominio.Core.Entities.Pedido
     {
         public int IdDetalle { get; set; }
         public int IdPedido { get; set; }
+
         [Display(Name = "Nombres")]
         public string Nombres { get; set; }
+
+        public string Apellidos { get; set; }
+
         public int IdProd { get; set; }
 
         [Display(Name = "Nombre Producto")]

@@ -1,0 +1,9 @@
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Pedido\obj\Debug\Infraestructura.Data.SqlServer.Pedido.csproj.AssemblyReference.cache
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Pedido\obj\Debug\Infraestructura.Data.SqlServer.Pedido.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Pedido\bin\Debug\Infraestructura.Data.SqlServer.Pedido.dll
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Pedido\bin\Debug\Infraestructura.Data.SqlServer.Pedido.pdb
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Pedido\bin\Debug\Dominio.Core.Entities.Pedido.dll
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Pedido\bin\Debug\Dominio.Core.Entities.Pedido.pdb
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Pedido\obj\Debug\Infraest.45A5E88B.Up2Date
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Pedido\obj\Debug\Infraestructura.Data.SqlServer.Pedido.dll
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Pedido\obj\Debug\Infraestructura.Data.SqlServer.Pedido.pdb

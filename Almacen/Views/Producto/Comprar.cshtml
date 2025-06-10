@@ -1,0 +1,40 @@
+﻿@model Dominio.Core.Entities.Producto.Tb_Producto
+
+@{
+    ViewBag.Title = "Confirmar Compra";
+
+    // Construcción de la ruta de imagen como en la vista de búsqueda
+    string nombreImagen = Model.NomProd.ToLower().Replace(" ", "-") + ".jpg";
+    string rutaRelativa = "/Content/Fotos/" + nombreImagen;
+    string rutaFisica = System.Web.HttpContext.Current.Server.MapPath(rutaRelativa);
+    string imagenUrl = System.IO.File.Exists(rutaFisica)
+        ? rutaRelativa
+        : "/Content/Fotos/default.jpg";
+}
+
+<h2>Comprar Producto</h2>
+
+<div class="card p-4">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="@Url.Content(imagenUrl)" class="img-fluid rounded shadow-sm" alt="Imagen de @Model.NomProd" />
+        </div>
+        <div class="col-md-8">
+            <h4>@Model.NomProd</h4>
+            <p><strong>Marca:</strong> @Model.MarcaProd</p>
+            <p><strong>Categoría:</strong> @Model.NomCate</p>
+            <p><strong>Precio:</strong> S/. @Model.PrecioUnit.ToString("N2")</p>
+            <p><strong>Stock Disponible:</strong> @Model.Stock</p>
+
+            <form action="@Url.Action("Agregar", "Carrito")" method="post">
+                <input type="hidden" name="idProd" value="@Model.IdProd" />
+                <div class="form-group">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" class="form-control" name="cantidad" id="cantidad" min="1" max="@Model.Stock" required />
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-3">Añadir al Carrito</button>
+            </form>
+        </div>
+    </div>
+</div>

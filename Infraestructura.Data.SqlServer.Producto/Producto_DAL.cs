@@ -76,7 +76,8 @@ namespace Infraestructura.Data.SqlServer.Producto
             return temporal;
         }
 
-        public string InsertarProducto(Tb_Producto producto) 
+        //Para Admin: Insertar Productos
+        public string InsertarProducto(Tb_Producto producto)
         {
             string mensaje = "";
             using (var cnx = cn.Conectar())
@@ -106,6 +107,7 @@ namespace Infraestructura.Data.SqlServer.Producto
             }
         }
 
+        //Para Admin: Actualizar Productos
         public string ActualizarProducto(Tb_Producto productos)
         {
             string mensaje = "";
@@ -232,7 +234,8 @@ namespace Infraestructura.Data.SqlServer.Producto
             return lista;
         }
 
-        public void EliminarProducto(int idProd) 
+        //Para Admin: Eliminar Productos
+        public void EliminarProducto(int idProd)
         {
             using (var cnx = cn.Conectar())
             {
@@ -245,6 +248,35 @@ namespace Infraestructura.Data.SqlServer.Producto
             }
         }
 
-       
+        public Tb_Producto BuscarProductoPorId(int idProd)
+        {
+            Tb_Producto producto = null;
+            using (var cnx = cn.Conectar())
+            {
+                SqlCommand cmd = new SqlCommand("usp_BuscarProductoPorId", cnx);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IdProd", idProd);
+
+                cnx.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    producto = new Tb_Producto
+                    {
+                        IdProd = Convert.ToInt32(dr["IdProd"]),
+                        NomProd = dr["NomProd"].ToString(),
+                        MarcaProd = dr["MarcaProd"].ToString(),
+                        PrecioUnit = Convert.ToDecimal(dr["PrecioUnit"]),
+                        Stock = Convert.ToInt32(dr["Stock"]),
+                        IdCate = Convert.ToInt32(dr["IdCate"]),
+                        NomCate = dr["NomCate"].ToString(),
+                        Activo = Convert.ToBoolean(dr["Activo"])
+                    };
+                }
+            }
+            return producto;
+        }
+
     }
 }
+

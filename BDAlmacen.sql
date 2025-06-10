@@ -108,7 +108,7 @@ INSERT INTO schLogin.Rol VALUES
 ('Usuario')
 GO
 
--- Tabla de Usuarios
+-- === Tabla de Usuarios === --
 CREATE TABLE schLogin.Usuario
 (
     idUser INT IDENTITY(1,1) PRIMARY KEY,
@@ -246,7 +246,7 @@ BEGIN
 END
 GO
 
--- Tabla de Categorías
+-- === Tabla de Categorías === --
 CREATE TABLE schProductos.Categoria
 (
     idCate INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
@@ -260,7 +260,7 @@ INSERT INTO schProductos.Categoria VALUES
 ('Cuidado Personal'), ('Hogar'), ('Mascotas'), ('Congelados'), ('Snacks y Botanas')
 GO
 
--- Tabla de Productos
+-- === Tabla de Productos === --
 CREATE TABLE schProductos.Producto
 (
     idProd INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
@@ -281,8 +281,28 @@ CREATE OR ALTER PROCEDURE usp_InsertarProducto
 @precioUnit DECIMAL(10,2),
 @stock SMALLINT
 AS
-INSERT INTO schProductos.Producto (nomProd, marcaProd, idCate, precioUnit, stock)
-VALUES (@nomProd, @marcaProd, @idCate, @precioUnit, @stock);
+
+IF EXISTS (
+    SELECT 1 FROM schProductos.Producto
+    WHERE nomProd = @nomProd
+      AND marcaProd = @marcaProd
+      AND idCate = @idCate
+      AND precioUnit = @precioUnit
+)
+BEGIN
+    RAISERROR('El producto ya existe.', 16, 1);
+    RETURN;
+END
+
+BEGIN
+    INSERT INTO schProductos.Producto (nomProd, marcaProd, idCate, precioUnit, stock)
+    VALUES (@nomProd, @marcaProd, @idCate, @precioUnit, @stock);
+
+    -- Desactivar producto si stock llega a cero
+    UPDATE schProductos.Producto
+    SET activo = 0
+    WHERE idProd = SCOPE_IDENTITY() AND stock <= 0;
+END;
 GO
 
 -- Actualizar Producto
@@ -345,6 +365,7 @@ BEGIN
 END
 GO
 
+-- Buscar Productos (Clientes)
 CREATE OR ALTER PROCEDURE usp_BuscarProductosUsuarioPag
     @busqueda NVARCHAR(200) = NULL,
     @numeroPagina INT,
@@ -388,6 +409,7 @@ BEGIN
 END;
 GO
 
+-- Buscar Productos (Admin)
 CREATE OR ALTER PROCEDURE usp_BuscarProductosAdminPag
     @busqueda NVARCHAR(200) = NULL,
     @numeroPagina INT,
@@ -422,6 +444,29 @@ BEGIN
 END;
 GO
 
+-- Buscar ID para Comprar producto
+CREATE or alter PROCEDURE usp_BuscarProductoPorId
+    @IdProd INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        p.IdProd,
+        p.NomProd,
+        p.MarcaProd,
+        p.PrecioUnit,
+        p.Stock,
+        p.IdCate,
+        c.NomCate,
+        p.Activo
+    FROM schProductos.Producto p
+    INNER JOIN schProductos.Categoria c ON p.IdCate = c.IdCate
+    WHERE p.IdProd = @IdProd;
+END;
+go
+
+-- === Tabla Pedido === --
 CREATE TABLE schPedidos.Pedido
 (
     idPedido INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
@@ -432,42 +477,259 @@ CREATE TABLE schPedidos.Pedido
 ) ON FGPedidos
 GO
 
+-- Crear Pedido(automatizado)
+CREATE OR ALTER PROCEDURE usp_CrearPedido
+    @idUser INT,
+    @total DECIMAL(12,2),
+    @estado VARCHAR(20) = 'Pendiente',
+    @NuevoPedido INT OUTPUT
+AS
+BEGIN
+    INSERT INTO schPedidos.Pedido (idUser, total, estado)
+    VALUES (@idUser, @total, @estado);
+
+    SET @NuevoPedido = SCOPE_IDENTITY();
+END;
+GO
+
+-- Listar Pedido (automatizado)
 create or alter procedure usp_listarPedidos
 as
 select U.nombres,U.apellidos,U.dni,U.correo,fecha,total,P.estado
-	from schPedidos.Pedido P join schLogin.Usuario U on P.idUser = U.idUser
+	from schPedidos.Pedido P 
+	join schLogin.Usuario U on P.idUser = U.idUser
 go
 
-exec usp_listarPedidos
+-- Eliminar producto y pedido
+create or alter procedure usp_EliminarProducto
+	@idProd int
+as
+-- Elimina los detalles de pedido que usan este producto
+	delete from schPedidos.DetallePedido where idProd = @idProd
+-- Elimina el producto del catalogo
+	delete from schProductos.Producto where idProd = @idProd
 go
 
--- Crear Pedido
-CREATE OR ALTER PROCEDURE usp_CrearPedido
-@idUser INT,
-@total DECIMAL(12,2),
-@estado VARCHAR(20) = 'Pendiente'
-AS
-INSERT INTO schPedidos.Pedido (idUser, total, estado)
-VALUES (@idUser, @total, @estado);
-SELECT SCOPE_IDENTITY() AS NuevoPedido;
-GO
-
--- Buscar por Nombre Usuario
+-- Buscador para admin
 CREATE OR ALTER PROCEDURE usp_BuscarPedidoUsuario
     @nombreUsuario NVARCHAR(100)
 AS
 BEGIN
-    SELECT U.nombres,U.apellidos,U.dni,U.correo,fecha,total,P.estado
+    SELECT 
+        p.idPedido,
+        u.nombres,
+        u.apellidos,
+        pr.nomProd,
+        d.cantidad,
+        d.precioUnit,
+        d.subtotal,
+        p.fecha,
+        p.total,
+        p.estado
     FROM schPedidos.Pedido p
+    JOIN schPedidos.DetallePedido d ON p.idPedido = d.idPedido
+    JOIN schProductos.Producto pr ON d.idProd = pr.idProd
     JOIN schLogin.Usuario u ON p.idUser = u.idUser
     WHERE u.nombres LIKE '%' + @nombreUsuario + '%'
-	OR u.login LIKE '%' + @nombreUsuario + '%'
-	OR u.apellidos LIKE '%' + @nombreUsuario + '%'
+       OR u.login LIKE '%' + @nombreUsuario + '%'
+       OR u.apellidos LIKE '%' + @nombreUsuario + '%'
+    ORDER BY p.fecha DESC;
+END;
+GO
+
+-- buscador para usuario
+CREATE OR ALTER PROCEDURE usp_BuscarPedidoUsuarioFiltrado
+    @idUser INT,
+    @nombreUsuario NVARCHAR(100),
+    @producto NVARCHAR(100)
+AS
+BEGIN
+    SELECT 
+        p.idPedido,
+        u.nombres,
+        u.apellidos,
+        pr.nomProd,
+        d.cantidad,
+        d.precioUnit,
+        d.subtotal,
+        p.fecha,
+        p.total,
+        p.estado
+    FROM schPedidos.Pedido p
+    JOIN schPedidos.DetallePedido d ON p.idPedido = d.idPedido
+    JOIN schProductos.Producto pr ON d.idProd = pr.idProd
+    JOIN schLogin.Usuario u ON p.idUser = u.idUser
+    WHERE p.idUser = @idUser
+      AND (
+           @nombreUsuario = '' OR
+           u.nombres LIKE '%' + @nombreUsuario + '%'
+           OR u.login LIKE '%' + @nombreUsuario + '%'
+           OR u.apellidos LIKE '%' + @nombreUsuario + '%'
+          )
+      AND (
+           @producto = '' OR
+           pr.nomProd LIKE '%' + @producto + '%'
+          )
     ORDER BY p.fecha DESC;
 END
 GO
 
--- Tabla de Detalle de Pedido
+-- === Tabla Carrito === --
+CREATE TABLE schPedidos.Carrito
+(
+    idCarrito INT IDENTITY(1,1) PRIMARY KEY,
+    idUser INT NOT NULL REFERENCES schLogin.Usuario(idUser),
+    fechaCreacion DATETIME NOT NULL DEFAULT GETDATE()
+) ON FGPedidos;
+GO
+
+-- == Detalle Carrito === --
+CREATE TABLE schPedidos.DetalleCarrito
+(
+    idDetalleCarrito INT IDENTITY(1,1) PRIMARY KEY,
+    idCarrito INT NOT NULL REFERENCES schPedidos.Carrito(idCarrito),
+    idProd INT NOT NULL REFERENCES schProductos.Producto(idProd),
+    cantidad INT NOT NULL,
+    precioUnit DECIMAL(10,2) NOT NULL,
+    subtotal AS (cantidad * precioUnit) PERSISTED
+) ON FGPedidos;
+GO
+
+-- Crear Carrito
+CREATE OR ALTER PROCEDURE usp_CrearCarrito
+    @idUser INT,
+    @idCarrito INT OUTPUT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT TOP 1 @idCarrito = idCarrito
+    FROM schPedidos.Carrito
+    WHERE idUser = @idUser
+    ORDER BY fechaCreacion DESC;
+
+    IF @idCarrito IS NULL
+    BEGIN
+        INSERT INTO schPedidos.Carrito (idUser)
+        VALUES (@idUser);
+
+        SET @idCarrito = SCOPE_IDENTITY();
+    END
+END;
+GO
+
+-- Agregar Producto al Carrito
+CREATE OR ALTER PROCEDURE usp_AgregarProductoCarrito
+    @idCarrito INT,
+    @idProd INT,
+    @cantidad INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @precioUnit DECIMAL(10,2);
+    DECLARE @stockActual INT;
+
+    SELECT @precioUnit = precioUnit, @stockActual = stock
+    FROM schProductos.Producto
+    WHERE idProd = @idProd AND activo = 1;
+
+    IF @stockActual IS NULL OR @stockActual < @cantidad
+    BEGIN
+        RAISERROR('Stock insuficiente o producto inactivo.', 16, 1);
+        RETURN;
+    END
+
+    IF EXISTS (SELECT 1 FROM schPedidos.DetalleCarrito WHERE idCarrito = @idCarrito AND idProd = @idProd)
+    BEGIN
+        UPDATE schPedidos.DetalleCarrito
+        SET cantidad = cantidad + @cantidad
+        WHERE idCarrito = @idCarrito AND idProd = @idProd;
+    END
+    ELSE
+    BEGIN
+        INSERT INTO schPedidos.DetalleCarrito (idCarrito, idProd, cantidad, precioUnit)
+        VALUES (@idCarrito, @idProd, @cantidad, @precioUnit);
+    END
+END;
+GO
+
+-- listar carrito
+CREATE OR ALTER PROCEDURE usp_ListarCarrito
+    @idCarrito INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT dc.idDetalleCarrito, dc.idProd, p.nomProd, p.marcaProd, dc.cantidad, dc.precioUnit, dc.subtotal
+    FROM schPedidos.DetalleCarrito dc
+    JOIN schProductos.Producto p ON dc.idProd = p.idProd
+    WHERE dc.idCarrito = @idCarrito;
+END;
+GO
+
+-- Eliminar producto del carrito
+CREATE OR ALTER PROCEDURE usp_EliminarProductoCarrito
+    @idCarrito INT,
+    @idProd INT
+AS
+BEGIN
+    DELETE FROM schPedidos.DetalleCarrito
+    WHERE idCarrito = @idCarrito AND idProd = @idProd;
+END;
+GO
+
+-- vaciar carrito
+CREATE OR ALTER PROCEDURE usp_VaciarCarrito
+    @idCarrito INT
+AS
+BEGIN
+    DELETE FROM schPedidos.DetalleCarrito WHERE idCarrito = @idCarrito;
+END;
+GO
+
+CREATE OR ALTER PROCEDURE usp_EfectuarCompra
+    @idCarrito INT,
+    @idUser INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @total DECIMAL(12,2) = 0;
+    DECLARE @idPedido INT;
+
+    -- Crear pedido con total 0 temporalmente y obtener el idPedido
+    EXEC usp_CrearPedido @idUser, 0, 'Pendiente', @NuevoPedido = @idPedido OUTPUT;
+
+    -- Cursor para recorrer productos del carrito
+    DECLARE detalle_cursor CURSOR FOR
+    SELECT idProd, cantidad FROM schPedidos.DetalleCarrito WHERE idCarrito = @idCarrito;
+
+    DECLARE @idProd INT, @cantidad INT;
+
+    OPEN detalle_cursor;
+    FETCH NEXT FROM detalle_cursor INTO @idProd, @cantidad;
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        EXEC usp_InsertarDetallePedido @idPedido, @idProd, @cantidad;
+        FETCH NEXT FROM detalle_cursor INTO @idProd, @cantidad;
+    END
+
+    CLOSE detalle_cursor;
+    DEALLOCATE detalle_cursor;
+
+    -- Actualizar total del pedido
+    SELECT @total = SUM(subtotal) FROM schPedidos.DetallePedido WHERE idPedido = @idPedido;
+    UPDATE schPedidos.Pedido SET total = @total WHERE idPedido = @idPedido;
+
+    -- Vaciar carrito
+    DELETE FROM schPedidos.DetalleCarrito WHERE idCarrito = @idCarrito;
+    DELETE FROM schPedidos.Carrito WHERE idCarrito = @idCarrito;
+END;
+GO
+
+-- === Tabla de Detalle de Pedido === --
 CREATE TABLE schPedidos.DetallePedido
 (
     idDetalle INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
@@ -524,59 +786,6 @@ BEGIN
 END
 GO
 
--- Eliminar producto y pedido
-create or alter procedure usp_EliminarProducto
-	@idProd int
-as
--- Elimina los detalles de pedido que usan este producto
-	delete from schPedidos.DetallePedido where idProd = @idProd
--- Elimina el producto del catalogo
-	delete from schProductos.Producto where idProd = @idProd
-go
-
--- Comprar Producto
-CREATE OR ALTER PROCEDURE usp_ComprarProducto
-    @idUser INT,
-    @idProd INT,
-    @cantidad INT
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    -- Verificar stock disponible
-    DECLARE @stockActual INT, @precioUnit DECIMAL(10,2);
-    SELECT @stockActual = stock, @precioUnit = precioUnit
-    FROM schProductos.Producto
-    WHERE idProd = @idProd AND activo = 1;
-
-    IF @stockActual IS NULL OR @stockActual < @cantidad
-    BEGIN
-        RAISERROR('Stock insuficiente o producto inactivo.', 16, 1);
-        RETURN;
-    END
-
-    -- Crear el pedido
-    INSERT INTO schPedidos.Pedido (idUser, total, estado)
-    VALUES (@idUser, @precioUnit * @cantidad, 'Pendiente');
-
-    DECLARE @idPedido INT = SCOPE_IDENTITY();
-
-    -- Insertar detalle de pedido
-    INSERT INTO schPedidos.DetallePedido (idPedido, idProd, cantidad, precioUnit, subtotal)
-    VALUES (@idPedido, @idProd, @cantidad, @precioUnit, @precioUnit * @cantidad);
-
-    -- Descontar stock
-    UPDATE schProductos.Producto
-    SET stock = stock - @cantidad
-    WHERE idProd = @idProd;
-
-    -- Desactivar producto si stock llega a cero
-    UPDATE schProductos.Producto
-    SET activo = 0
-    WHERE idProd = @idProd AND stock <= 0;
-END;
-GO
-
 -- Historial de Pedidos por Usuario
 CREATE OR ALTER PROCEDURE usp_HistorialPedidosUsuario
 @idUser INT
@@ -584,6 +793,7 @@ AS
 SELECT 
 	p.idPedido,
 	u.nombres,
+	u.apellidos,
     pr.nomProd,
     d.cantidad,
     d.precioUnit,
@@ -599,13 +809,34 @@ WHERE p.idUser = @idUser
 ORDER BY p.fecha DESC, p.idPedido DESC;
 GO
 
+CREATE OR ALTER PROCEDURE usp_HistorialPedidosAdmin
+AS
+SELECT 
+    p.idPedido,
+    u.nombres,
+    u.apellidos,
+    pr.nomProd,
+    d.cantidad,
+    d.precioUnit,
+    d.subtotal,
+    p.fecha,
+    p.total,
+    p.estado
+FROM schPedidos.Pedido p
+JOIN schPedidos.DetallePedido d ON p.idPedido = d.idPedido
+JOIN schProductos.Producto pr ON d.idProd = pr.idProd
+JOIN schLogin.Usuario u ON p.idUser = u.idUser
+ORDER BY p.fecha DESC, p.idPedido DESC;
+GO
+
 -- Ejemplo de inserciones y pruebas
 EXEC usp_CrearUser 'Osiander Stivent', 'Carhuas Marallano', '74643027', 1, 'MRBILL32', 'D@k12345', 'stivent456@gmail.com','Aprobado'
+exec usp_CrearUser 'yakuza','zx','12345678',2,'yakuzazx','12345','yakuza@gmail.com','Aprobado'
 EXEC usp_ListarUser
 EXEC usp_InicioSesion 'MRBILL32','D@k12345'
 go
 
-EXEC usp_InsertarProducto 'Yogurt Griego', 'Chobani', 1, 25.50, 30;
+EXEC usp_InsertarProducto 'Yogurt Griego', 'Chobani', 1, 25.50, 30;			-- Lacteos
 EXEC usp_InsertarProducto 'Yogurt Natural', 'Gloria', 1, 3.50, 100;         -- Lacteos
 EXEC usp_InsertarProducto 'Leche Entera', 'Laive', 1, 4.20, 80;             -- Lacteos
 EXEC usp_InsertarProducto 'Queso Fresco', 'Bonlé', 1, 7.50, 60;             -- Lacteos
@@ -626,7 +857,6 @@ EXEC usp_InsertarProducto 'Detergente en Polvo', 'Ace', 3, 18.00, 60;       -- L
 EXEC usp_InsertarProducto 'Papel Higiénico 4 rollos', 'Elite', 11, 9.00, 30;-- Hogar
 EXEC usp_InsertarProducto 'Alimento para Perro', 'Dog Chow', 12, 45.00, 20; -- Mascotas
 EXEC usp_InsertarProducto 'Helado de Vainilla', 'D´Onofrio', 13, 12.00, 25; -- Congelados
-EXEC usp_InsertarProducto 'Helado de Vainilla', 'D´Onofrio', 13, 12.00, 0; -- Congelados
 go
 
 exec usp_ListaProducAdmin

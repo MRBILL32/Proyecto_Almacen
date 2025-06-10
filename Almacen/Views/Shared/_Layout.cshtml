@@ -33,10 +33,13 @@
                         if ((int)Session["idRol"] == 1) // Admin
                         {
                             <li>@Html.ActionLink("Productos", "ProductosAdmin", "Producto", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Historial Pedidos", "HistorialPedidos", "Pedido", new { area = "" }, new { @class = "nav-link" })</li>
                         }
                         else if ((int)Session["idRol"] == 2) // Usuario normal
                         {
-                <li>@Html.ActionLink("Productos", "ProductosUsuario", "Producto", new { numeropagina = 1, area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Productos", "ProductosUsuario", "Producto", new { numeropagina = 1, area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Mi Carrito", "Carrito", "Carrito", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Historial Pedidos", "HistorialPedidos", "Pedido", new { area = "" }, new { @class = "nav-link" })</li>
                         }
                     }
                 </ul>

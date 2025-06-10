@@ -1,0 +1,9 @@
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Carrito\bin\Debug\Infraestructura.Data.SqlServer.Carrito.dll
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Carrito\bin\Debug\Infraestructura.Data.SqlServer.Carrito.pdb
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Carrito\bin\Debug\Dominio.Core.Entities.Carrito.dll
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Carrito\bin\Debug\Dominio.Core.Entities.Carrito.pdb
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Carrito\obj\Debug\Infraestructura.Data.SqlServer.Carrito.csproj.AssemblyReference.cache
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Carrito\obj\Debug\Infraestructura.Data.SqlServer.Carrito.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Carrito\obj\Debug\Infraest.8FCB0431.Up2Date
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Carrito\obj\Debug\Infraestructura.Data.SqlServer.Carrito.dll
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer.Carrito\obj\Debug\Infraestructura.Data.SqlServer.Carrito.pdb

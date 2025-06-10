@@ -120,7 +120,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -146,6 +148,8 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\fotos\nintendo-switch-2.jpg" />
+    <Content Include="Content\fotos\nintendo-switch.jpg" />
+    <Content Include="Content\fotos\playstation-5-pro.jpg" />
     <Content Include="Content\fotos\yogurt-griego.jpg" />
     <Content Include="Content\fotos\café-instantáneo.jpg" />
     <Content Include="Content\fotos\gaseosa-1.5l.jpg" />
@@ -213,6 +217,9 @@
     <Content Include="Views\Producto\ProductosAdmin.cshtml" />
     <Content Include="Views\Producto\Editar.cshtml" />
     <Content Include="Views\Producto\InsertarProducto.cshtml" />
+    <Content Include="Views\Producto\Comprar.cshtml" />
+    <Content Include="Views\Carrito\Carrito.cshtml" />
+    <Content Include="Views\Pedido\HistorialPedidos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -246,6 +253,10 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dominio.Core.Entities.Carrito\Dominio.Core.Entities.Carrito.csproj">
+      <Project>{651ef631-3909-4154-9955-dccddddf8e59}</Project>
+      <Name>Dominio.Core.Entities.Carrito</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dominio.Core.Entities.Pedido\Dominio.Core.Entities.Pedido.csproj">
       <Project>{c4b7e0e6-4f87-45e4-bc23-09c192d89e77}</Project>
       <Name>Dominio.Core.Entities.Pedido</Name>
@@ -258,6 +269,14 @@
       <Project>{5cd463b0-6e31-4abe-a8be-a81b8d14ae26}</Project>
       <Name>Dominio.Core.Entities.Login</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dominio.Core.MainModule.Carrito\Dominio.Core.MainModule.Carrito.csproj">
+      <Project>{5789c04b-daac-445d-8d20-aa09861c49aa}</Project>
+      <Name>Dominio.Core.MainModule.Carrito</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dominio.Core.MainModule.Pedido\Dominio.Core.MainModule.Pedido.csproj">
+      <Project>{9e4c4a42-5bcc-452e-ab9a-457efdb64ad2}</Project>
+      <Name>Dominio.Core.MainModule.Pedido</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dominio.Core.MainModule.Producto\Dominio.Core.MainModule.Producto.csproj">
       <Project>{e9bbdde2-1fcb-4978-8063-5d12d36d1cad}</Project>
       <Name>Dominio.Core.MainModule.Producto</Name>
@@ -265,6 +284,14 @@
     <ProjectReference Include="..\Dominio.Core.MainModule\Dominio.Core.MainModule.Login.csproj">
       <Project>{a966cabc-6295-48a5-b94f-84d61a5be7df}</Project>
       <Name>Dominio.Core.MainModule.Login</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infraestructura.Data.SqlServer.Carrito\Infraestructura.Data.SqlServer.Carrito.csproj">
+      <Project>{14a12dd6-7d6b-40a2-a08e-6527495ae9e8}</Project>
+      <Name>Infraestructura.Data.SqlServer.Carrito</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infraestructura.Data.SqlServer.Pedido\Infraestructura.Data.SqlServer.Pedido.csproj">
+      <Project>{8fa8b655-4b3d-4825-8d3f-7dde5b91352d}</Project>
+      <Name>Infraestructura.Data.SqlServer.Pedido</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infraestructura.Data.SqlServer.Producto\Infraestructura.Data.SqlServer.Producto.csproj">
       <Project>{c4778b99-8e20-4289-b4f7-5a1f9d57612f}</Project>

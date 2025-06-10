@@ -33,6 +33,19 @@
     </div>
 }
 
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">@TempData["Mensaje"]</div>
+}
+
+<!-- Ver Carrito de compras -->
+<div class="mb-3">
+    <a href="@Url.Action("Carrito", "Carrito")" class="btn btn-success">
+        Carrito de Compras
+    </a>
+</div>
+
+
 @if (!Model.Any())
 {
     <div class="alert alert-danger" role="alert">
@@ -65,7 +78,7 @@ else
                         <a href="@Url.Action("Comprar", "Producto", new { id = item.IdProd })"
                            class="btn btn-success mt-auto @(item.Stock == 0 ? "disabled" : "")"
                            @(item.Stock == 0 ? "tabindex='-1' aria-disabled='true'" : "")>
-                            Comprar
+                            Seleccionar
                         </a>
                         @if (item.Stock == 0)
                         {

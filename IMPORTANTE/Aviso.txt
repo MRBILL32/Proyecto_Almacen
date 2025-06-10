@@ -1,0 +1,2 @@
+La base de datos se guarda de forma local en el disco local D:
+por lo que es obligatorio que copie la carpeta DBAlmacen y la guarde en el disco local D:

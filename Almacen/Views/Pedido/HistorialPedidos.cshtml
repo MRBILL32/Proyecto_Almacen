@@ -1,0 +1,52 @@
+﻿@model List<Dominio.Core.Entities.Pedido.DetallePedido>
+
+<h2>Historial de Pedidos</h2>
+
+@using (Html.BeginForm("BuscarPedidos", "Pedido", FormMethod.Get))
+{
+    <div class="input-group mb-3">
+        <input type="text" name="nombreUsuario" class="form-control" placeholder="Buscar por nombre o usuario" value="@Request.QueryString["nombreUsuario"]" />
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <p>No hay pedidos para mostrar.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Pedido</th>
+                <th>Cliente</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+                <th>Fecha</th>
+                <th>Total Pedido</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.IdPedido</td>
+                    <td>@item.Nombres @item.Apellidos</td>
+                    <td>@item.NomProd</td>
+                    <td>@item.Cantidad</td>
+                    <td>@item.PrecioUnit.ToString("N2")</td>
+                    <td>@item.Subtotal.ToString("N2")</td>
+                    <td>@item.Fecha.ToString("dd/MM/yyyy")</td>
+                    <td>@item.Total.ToString("N2")</td>
+                    <td>@item.Estado</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

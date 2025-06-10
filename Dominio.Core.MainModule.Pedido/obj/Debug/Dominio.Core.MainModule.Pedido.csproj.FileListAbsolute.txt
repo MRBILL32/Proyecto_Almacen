@@ -1,0 +1,11 @@
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Pedido\obj\Debug\Dominio.Core.MainModule.Pedido.csproj.AssemblyReference.cache
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Pedido\obj\Debug\Dominio.Core.MainModule.Pedido.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Pedido\bin\Debug\Dominio.Core.MainModule.Pedido.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Pedido\bin\Debug\Dominio.Core.MainModule.Pedido.pdb
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Pedido\bin\Debug\Dominio.Core.Entities.Pedido.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Pedido\bin\Debug\Infraestructura.Data.SqlServer.Pedido.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Pedido\bin\Debug\Dominio.Core.Entities.Pedido.pdb
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Pedido\bin\Debug\Infraestructura.Data.SqlServer.Pedido.pdb
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Pedido\obj\Debug\Dominio..B897FDC5.Up2Date
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Pedido\obj\Debug\Dominio.Core.MainModule.Pedido.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Pedido\obj\Debug\Dominio.Core.MainModule.Pedido.pdb
