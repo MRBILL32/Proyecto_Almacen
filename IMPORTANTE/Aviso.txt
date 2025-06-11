@@ -1,2 +1,11 @@
 La base de datos se guarda de forma local en el disco local D:
 por lo que es obligatorio que copie la carpeta DBAlmacen y la guarde en el disco local D:
+
+en caso no este aquí adjunto el archivo para pegar en D:
+
+simplemente creen en disco local D: un archivo y llámenlo DBAlmacen el cual tendrá dentro 4 carpetas
+
+- Almacen
+- Pedidos
+- Login
+- Productos
