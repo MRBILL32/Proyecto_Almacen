@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\Administrator\\Downloads\\Almacen\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|c:\\users\\administrator\\downloads\\almacen\\almacen\\controllers\\pedidocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|solutionrelative:almacen\\controllers\\pedidocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9E4C4A42-5BCC-452E-AB9A-457EFDB64AD2}|Dominio.Core.MainModule.Pedido\\Dominio.Core.MainModule.Pedido.csproj|c:\\users\\administrator\\downloads\\almacen\\dominio.core.mainmodule.pedido\\pedidomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9E4C4A42-5BCC-452E-AB9A-457EFDB64AD2}|Dominio.Core.MainModule.Pedido\\Dominio.Core.MainModule.Pedido.csproj|solutionrelative:dominio.core.mainmodule.pedido\\pedidomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8FA8B655-4B3D-4825-8D3F-7DDE5B91352D}|Infraestructura.Data.SqlServer.Pedido\\Infraestructura.Data.SqlServer.Pedido.csproj|c:\\users\\administrator\\downloads\\almacen\\infraestructura.data.sqlserver.pedido\\pedido_dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8FA8B655-4B3D-4825-8D3F-7DDE5B91352D}|Infraestructura.Data.SqlServer.Pedido\\Infraestructura.Data.SqlServer.Pedido.csproj|solutionrelative:infraestructura.data.sqlserver.pedido\\pedido_dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|c:\\users\\administrator\\downloads\\almacen\\almacen\\views\\pedido\\historialpedidos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|solutionrelative:almacen\\views\\pedido\\historialpedidos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|c:\\users\\administrator\\downloads\\almacen\\almacen\\views\\usuario\\iniciarsesion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|solutionrelative:almacen\\views\\usuario\\iniciarsesion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,60 +14,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HistorialPedidos.cshtml",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Views\\Pedido\\HistorialPedidos.cshtml",
-              "RelativeDocumentMoniker": "Almacen\\Views\\Pedido\\HistorialPedidos.cshtml",
-              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Views\\Pedido\\HistorialPedidos.cshtml",
-              "RelativeToolTip": "Almacen\\Views\\Pedido\\HistorialPedidos.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-10T10:29:11.49Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PedidoController.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Controllers\\PedidoController.cs",
-              "RelativeDocumentMoniker": "Almacen\\Controllers\\PedidoController.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Controllers\\PedidoController.cs*",
-              "RelativeToolTip": "Almacen\\Controllers\\PedidoController.cs*",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAuwCUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T10:28:51.551Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PedidoManager.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\Dominio.Core.MainModule.Pedido\\PedidoManager.cs",
-              "RelativeDocumentMoniker": "Dominio.Core.MainModule.Pedido\\PedidoManager.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\Dominio.Core.MainModule.Pedido\\PedidoManager.cs*",
-              "RelativeToolTip": "Dominio.Core.MainModule.Pedido\\PedidoManager.cs*",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAiwCEAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T10:28:36.736Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Pedido_DAL.cs",
-              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\Infraestructura.Data.SqlServer.Pedido\\Pedido_DAL.cs",
-              "RelativeDocumentMoniker": "Infraestructura.Data.SqlServer.Pedido\\Pedido_DAL.cs",
-              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\Infraestructura.Data.SqlServer.Pedido\\Pedido_DAL.cs*",
-              "RelativeToolTip": "Infraestructura.Data.SqlServer.Pedido\\Pedido_DAL.cs*",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAowJgAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T10:21:08.367Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -87,6 +23,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IniciarSesion.cshtml",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Views\\Usuario\\IniciarSesion.cshtml",
+              "RelativeDocumentMoniker": "Almacen\\Views\\Usuario\\IniciarSesion.cshtml",
+              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\Almacen\\Views\\Usuario\\IniciarSesion.cshtml",
+              "RelativeToolTip": "Almacen\\Views\\Usuario\\IniciarSesion.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-10T10:56:27.036Z",
+              "EditorCaption": ""
             }
           ]
         }
