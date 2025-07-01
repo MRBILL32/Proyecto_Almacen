@@ -1,0 +1,34 @@
+﻿@model List<Dominio.Core.Entities.Pedido.DetallePedidoClienteDTO>
+
+<h2>Historial de Pedidos</h2>
+
+@if (!Model.Any())
+{
+    <p>No hay pedidos para mostrar.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario (S/.)</th>
+                <th>Subtotal (S/.)</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.NomProd</td>
+                    <td>@item.Cantidad</td>
+                    <td>@item.PrecioUnit.ToString("N2")</td>
+                    <td>@item.Subtotal.ToString("N2")</td>
+                    <td>@item.Fecha.ToString("dd/MM/yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

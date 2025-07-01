@@ -1,0 +1,6 @@
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Carrito\bin\Debug\Dominio.Core.Entities.Carrito.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Carrito\bin\Debug\Dominio.Core.Entities.Carrito.pdb
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Carrito\obj\Debug\Dominio.Core.Entities.Carrito.csproj.AssemblyReference.cache
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Carrito\obj\Debug\Dominio.Core.Entities.Carrito.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Carrito\obj\Debug\Dominio.Core.Entities.Carrito.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Carrito\obj\Debug\Dominio.Core.Entities.Carrito.pdb

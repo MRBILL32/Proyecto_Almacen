@@ -1,0 +1,11 @@
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Carrito\bin\Debug\Dominio.Core.MainModule.Carrito.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Carrito\bin\Debug\Dominio.Core.MainModule.Carrito.pdb
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Carrito\bin\Debug\Dominio.Core.Entities.Carrito.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Carrito\bin\Debug\Infraestructura.Data.SqlServer.Carrito.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Carrito\bin\Debug\Dominio.Core.Entities.Carrito.pdb
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Carrito\bin\Debug\Infraestructura.Data.SqlServer.Carrito.pdb
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Carrito\obj\Debug\Dominio.Core.MainModule.Carrito.csproj.AssemblyReference.cache
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Carrito\obj\Debug\Dominio.Core.MainModule.Carrito.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Carrito\obj\Debug\Dominio..925DA3DF.Up2Date
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Carrito\obj\Debug\Dominio.Core.MainModule.Carrito.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.MainModule.Carrito\obj\Debug\Dominio.Core.MainModule.Carrito.pdb

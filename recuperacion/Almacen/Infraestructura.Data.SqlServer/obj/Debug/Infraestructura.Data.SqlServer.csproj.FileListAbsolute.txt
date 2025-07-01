@@ -1,0 +1,9 @@
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer\bin\Debug\Infraestructura.Data.SqlServer.dll
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer\bin\Debug\Infraestructura.Data.SqlServer.pdb
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer\bin\Debug\Dominio.Core.Entities.dll
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer\bin\Debug\Dominio.Core.Entities.pdb
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer\obj\Debug\Infraestructura.Data.SqlServer.csproj.AssemblyReference.cache
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer\obj\Debug\Infraestructura.Data.SqlServer.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer\obj\Debug\Infraest.8EC3EF4C.Up2Date
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer\obj\Debug\Infraestructura.Data.SqlServer.dll
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Data.SqlServer\obj\Debug\Infraestructura.Data.SqlServer.pdb

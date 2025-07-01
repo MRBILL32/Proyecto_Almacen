@@ -1,0 +1,6 @@
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Producto\bin\Debug\Dominio.Core.Entities.Producto.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Producto\bin\Debug\Dominio.Core.Entities.Producto.pdb
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Producto\obj\Debug\Dominio.Core.Entities.Producto.csproj.AssemblyReference.cache
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Producto\obj\Debug\Dominio.Core.Entities.Producto.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Producto\obj\Debug\Dominio.Core.Entities.Producto.dll
+C:\Users\Administrator\Downloads\Almacen\Dominio.Core.Entities.Producto\obj\Debug\Dominio.Core.Entities.Producto.pdb

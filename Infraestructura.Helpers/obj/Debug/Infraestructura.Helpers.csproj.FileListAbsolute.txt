@@ -1,0 +1,6 @@
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Helpers\bin\Debug\Infraestructura.Helpers.dll
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Helpers\bin\Debug\Infraestructura.Helpers.pdb
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Helpers\obj\Debug\Infraestructura.Helpers.csproj.AssemblyReference.cache
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Helpers\obj\Debug\Infraestructura.Helpers.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Helpers\obj\Debug\Infraestructura.Helpers.dll
+C:\Users\Administrator\Downloads\Almacen\Infraestructura.Helpers\obj\Debug\Infraestructura.Helpers.pdb

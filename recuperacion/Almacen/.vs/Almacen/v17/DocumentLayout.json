@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Administrator\\Downloads\\Almacen\\recuperacion\\Almacen\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B66D20F5-7719-494B-925F-0DDE90788682}|Infraestructura.Data.SqlServer\\Infraestructura.Data.SqlServer.csproj|c:\\users\\administrator\\downloads\\almacen\\recuperacion\\almacen\\infraestructura.data.sqlserver\\usuario_dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B66D20F5-7719-494B-925F-0DDE90788682}|Infraestructura.Data.SqlServer\\Infraestructura.Data.SqlServer.csproj|solutionrelative:infraestructura.data.sqlserver\\usuario_dal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|C:\\Users\\Administrator\\Downloads\\Almacen\\recuperacion\\Almacen\\almacen\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|solutionrelative:almacen\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|C:\\Users\\Administrator\\Downloads\\Almacen\\recuperacion\\Almacen\\almacen\\views\\usuario\\registrar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|solutionrelative:almacen\\views\\usuario\\registrar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|c:\\users\\administrator\\downloads\\almacen\\recuperacion\\almacen\\almacen\\views\\usuario\\iniciarsesion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7E2DEF9E-53F8-43B9-8380-FB32BA77BEDD}|Almacen\\Almacen.csproj|solutionrelative:almacen\\views\\usuario\\iniciarsesion.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Usuario_DAL.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\recuperacion\\Almacen\\Infraestructura.Data.SqlServer\\Usuario_DAL.cs",
+              "RelativeDocumentMoniker": "Infraestructura.Data.SqlServer\\Usuario_DAL.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\recuperacion\\Almacen\\Infraestructura.Data.SqlServer\\Usuario_DAL.cs",
+              "RelativeToolTip": "Infraestructura.Data.SqlServer\\Usuario_DAL.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-06T16:49:48.817Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UsuarioController.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\recuperacion\\Almacen\\Almacen\\Controllers\\UsuarioController.cs",
+              "RelativeDocumentMoniker": "Almacen\\Controllers\\UsuarioController.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\recuperacion\\Almacen\\Almacen\\Controllers\\UsuarioController.cs",
+              "RelativeToolTip": "Almacen\\Controllers\\UsuarioController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAA1wCYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-02T21:23:00.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IniciarSesion.cshtml",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\recuperacion\\Almacen\\Almacen\\Views\\Usuario\\IniciarSesion.cshtml",
+              "RelativeDocumentMoniker": "Almacen\\Views\\Usuario\\IniciarSesion.cshtml",
+              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\recuperacion\\Almacen\\Almacen\\Views\\Usuario\\IniciarSesion.cshtml",
+              "RelativeToolTip": "Almacen\\Views\\Usuario\\IniciarSesion.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-02T21:21:27.083Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Registrar.cshtml",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Downloads\\Almacen\\recuperacion\\Almacen\\Almacen\\Views\\Usuario\\Registrar.cshtml",
+              "RelativeDocumentMoniker": "Almacen\\Views\\Usuario\\Registrar.cshtml",
+              "ToolTip": "C:\\Users\\Administrator\\Downloads\\Almacen\\recuperacion\\Almacen\\Almacen\\Views\\Usuario\\Registrar.cshtml",
+              "RelativeToolTip": "Almacen\\Views\\Usuario\\Registrar.cshtml",
+              "ViewState": "AgIAADYAAAAAAAAAAAAUwGAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-02T21:06:28.809Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
